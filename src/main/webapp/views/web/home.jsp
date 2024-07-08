@@ -6,12 +6,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Trang chủ</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-	<div class="p-4 p-lg-5 bg-light rounded-3  ">
+	<!-- Header-->
+	<header class="py-5 ">
+	<div class="container  ">
+		<div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+			<div class="m-4 m-lg-5">
+				<h1 class="display-5 fw-bold">Trộn đề trắc nghiêm Online</h1>
+				<p class="fs-4">Làm khó học sinh, giáo viên dễ chấm</p>
+				<form action="upload-de-goc" method="post"
+					enctype="multipart/form-data">
+					<label for="de-goc" class="btn btn-primary btn-lg"> <i
+						class="fa-solid fa-upload"></i> Chọn File
+					</label> <input id="de-goc" name="de-goc" type="file"
+						style="display: none;" accept=".docx"
+						onchange="handleFileSelect(event)">
+				</form>
+				<p>Kéo thả hoặc nhấn chọn</p>
+			</div>
+		</div>
+	</div>
+	</header>
+	<div class="container p-4 p-lg-5 bg-light rounded-3  ">
 		<div>
 			<h3 class="text-center">Lưu ý khi tải File lên</h3>
-			<div class="p-6">
+			<div class="p-3 p-lg-6">
 				<p>• Câu hỏi phải bắt đầu bằng chữ "Câu", ví dụ: Câu 1, Câu
 					2,.... (Hoặc chữ "Question", ví dụ: Question 1, Question 2,...).</p>
 				<p>• Phải xuống dòng (gỗ Enter) trước khi gõ các đáp án.</p>
@@ -38,7 +59,7 @@
 								class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
 								<i class="bi bi-cloud-download"></i>
 							</div>
-							<h2 class="fs-4 fw-bold">Tải xuống nhanh chống</h2>
+							<h2 class="fs-4 fw-bold">Tải xuống nhanh chóng</h2>
 							<p class="mb-0">tiện lợi, nhanh gọn, dễ dàng sử dụng</p>
 						</div>
 					</div>
