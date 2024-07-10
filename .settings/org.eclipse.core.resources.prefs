@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/xaocauhoitracnghiem/model/ExamModel.java=UTF-8
+encoding//src/main/java/com/xaocauhoitracnghiem/service/IDeGocService.java=UTF-8
+encoding//src/main/java/com/xaocauhoitracnghiem/service/impl/DeGocService.java=UTF-8
+encoding//src/main/java/com/xaocauhoitracnghiem/utils/ReadDeGoc.java=UTF-8

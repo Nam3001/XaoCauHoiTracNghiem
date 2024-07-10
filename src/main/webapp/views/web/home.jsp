@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.xaocauhoitracnghiem.model.AnswerModel"%>
 <%@include file="/common/taglib.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Trang chủ</title>
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/styles.css' />">
 </head>
 <body>
 	<!-- Header-->
@@ -16,15 +23,15 @@
 			<div class="m-4 m-lg-5">
 				<h1 class="display-5 fw-bold">Trộn đề trắc nghiêm Online</h1>
 				<p class="fs-4">Làm khó học sinh, giáo viên dễ chấm</p>
-				<form action="upload-de-goc" method="post"
+
+				<form id="form-upload-de-goc" action="upload-de-goc" method="post"
 					enctype="multipart/form-data">
 					<label for="de-goc" class="btn btn-primary btn-lg"> <i
 						class="fa-solid fa-upload"></i> Chọn File
 					</label> <input id="de-goc" name="de-goc" type="file"
-						style="display: none;" accept=".docx"
-						onchange="handleFileSelect(event)">
+						style="display: none;" accept=".docx">
 				</form>
-				<p>Kéo thả hoặc nhấn chọn</p>
+				<p class="mt-2">Kéo thả hoặc nhấn chọn</p>
 			</div>
 		</div>
 	</div>
@@ -92,5 +99,21 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		
+		function handleFileSelect(e) {
+			form = document.querySelector('#form-upload-de-goc');
+			form.submit();
+		}
+
+		inputChonFile = document
+				.querySelector('#form-upload-de-goc input[name="de-goc"]');
+		
+		window.addEventListener('load', function() {
+			inputChonFile.value = ''
+		})
+		
+		inputChonFile.addEventListener('change', handleFileSelect)
+	</script>
 </body>
 </html>

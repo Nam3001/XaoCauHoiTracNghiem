@@ -2,7 +2,7 @@
 @media only screen and (min-width: 992px) {
     #sidebar, #content {
         overflow-y: auto;
-        max-height: calc(100vh - 56px - 40px);
+        max-height: calc(100vh - 56px - 56px);
     }
     #sidebar {
         width: 380px;

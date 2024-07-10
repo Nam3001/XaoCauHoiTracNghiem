@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.xaocauhoitracnghiem.utils.EquationToMathML"%>
+<%@include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Tùy chỉnh trộn đề</title>
+
 </head>
 <body>
 	<main class="container-fluid d-lg-flex flex-row m-0 p-0 ">
@@ -17,9 +20,9 @@
 		<div class="section mt-3">
 			<h2>Thông tin file gốc</h2>
 			<ul>
-				<li>Tên File: <span>đề toán.docx</span></li>
-				<li>Số lượng câu hỏi: <span>50</span></li>
-				<li>Số nhóm: <span>1</span></li>
+				<li>Tên File: <span>${ fileName }</span></li>
+				<li>Số lượng câu hỏi: <span>${ questionAmount }</span></li>
+				<li>Số nhóm: <span>${ groupAmount }</span></li>
 			</ul>
 
 		</div>
@@ -73,7 +76,7 @@
 					</div>
 					<div class="col-8">
 						<input class="form-control" type="text" id="ten-file"
-							name="ten-file" value="Example.pdf" readonly>
+							name="ten-file" value="Sở GD THỪA THIÊN HUẾ" readonly>
 					</div>
 				</div>
 
@@ -83,7 +86,7 @@
 					</div>
 					<div class="col-8">
 						<input class="form-control" type="text" id="ten-file"
-							name="ten-file" value="Example.pdf" readonly>
+							name="ten-file" value="TRƯỜNG THPT ..." readonly>
 					</div>
 				</div>
 				<div class="py-1 row g-3 align-items-center justify-content-between">
@@ -93,7 +96,7 @@
 					</div>
 					<div class="col-8">
 						<input class="form-control" type="text" id="ten-file"
-							name="ten-file" value="Example.pdf" readonly>
+							name="ten-file" value="HỌC KỲ I" readonly>
 					</div>
 				</div>
 				<div class="py-1 row g-3 align-items-center justify-content-between">
@@ -102,7 +105,7 @@
 					</div>
 					<div class="col-8">
 						<input class="form-control" type="text" id="ten-file"
-							name="ten-file" value="Example.pdf" readonly>
+							name="ten-file" value="TOÁN" readonly>
 					</div>
 				</div>
 				<div class="py-1 row g-3 align-items-center justify-content-between">
@@ -112,7 +115,7 @@
 					</div>
 					<div class="col-8">
 						<input class="form-control" type="text" id="ten-file"
-							name="ten-file" value="Example.pdf" readonly>
+							name="ten-file" value="90 phút" readonly>
 					</div>
 				</div>
 
@@ -126,7 +129,32 @@
 	</div>
 
 	<div id="content" class="col-12">
-		<div class="bg-primary"></div>
+		<div class="bg-light min-vh-100 px-4 py-1">
+			<c:forEach items="${ exam.groupList }" var="questionGroup">
+				<c:forEach items="${questionGroup.groupInfo }" var="groupInfo">
+					<span class="h5 fw-bold">${EquationToMathML.getTextAndFormulas(groupInfo) }</span>
+				</c:forEach>
+				<c:forEach items="${ questionGroup.questionList }" var="question">
+					<p class="fw-bold mb-2 pt-2">
+						<c:forEach items="${ question.questionContent }" var="content">
+							<span>${ EquationToMathML.getTextAndFormulas(content) }</span>
+						</c:forEach>
+					</p>
+					<c:forEach items="${ question.answerList }" var="answer">
+						<p class="small mb-2">
+							<c:choose>
+								<c:when test="${answer.isRightAnswer == true}">
+									<span class="text-danger">${ EquationToMathML.getTextAndFormulas(answer.content) } <i class="bi bi-check2"></i></span>
+								</c:when>
+								<c:otherwise>
+									<span>${ EquationToMathML.getTextAndFormulas(answer.content) }</span>
+								</c:otherwise>
+							</c:choose>
+						</p>
+					</c:forEach>
+				</c:forEach>
+			</c:forEach>
+		</div>
 	</div>
 	</main>
 </body>

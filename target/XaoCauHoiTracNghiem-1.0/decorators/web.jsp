@@ -6,11 +6,13 @@
 <head>
 <title><dec:title default="Trang chủ" /></title>
 
+<link rel="icon" type="image/x-icon" href="<c:url value='/template/web/assets/favicon.ico' />" />
+<!-- icon links -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <!-- css -->
 <link href="<c:url value='/template/web/css/tuyChinhXaoCauHoi.css' />"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/template/web/css/style.css"
 	rel="stylesheet">
 <link rel="icon" type="image/x-icon"
 	href="/template/web/assets/favicon.ico" />
