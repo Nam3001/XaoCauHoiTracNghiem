@@ -146,8 +146,7 @@
 
 			</div>
 			<div class="d-flex justify-content-center mt-3">
-				<button id="tron-de" class="btn btn-light w-50 "
-					data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+				<button id="tron-de" class="btn btn-light w-50 ">
 					<i class="fa-solid fa-download"></i> <span>Trộn đề</span>
 				</button>
 			</div>
@@ -204,5 +203,30 @@
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+	
+	var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+	
+	window.onload = function() {
+		var perfEntries = performance.getEntriesByType("navigation");
+
+		if (perfEntries[0].type === "back_forward") {
+		    location.reload();
+		}
+		
+		console.log('hide')
+		modal.hide();
+	}
+	
+	var form = document.querySelector('form[action="tron-de"]');
+	var tronDeBtn = document.getElementById('tron-de');
+	tronDeBtn.addEventListener('click', function(e) {
+		e.preventDefault();
+		modal.show();
+		form.submit();
+	})
+	</script>
 </body>
 </html>

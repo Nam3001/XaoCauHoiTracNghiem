@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
-encoding//src/main/java/com/xaocauhoitracnghiem/controller/DownloadExam.java=UTF-8
+encoding//src/main/java/com/xaocauhoitracnghiem/controller/DownloadExamController.java=UTF-8
 encoding//src/main/java/com/xaocauhoitracnghiem/model/ExamModel.java=UTF-8
 encoding//src/main/java/com/xaocauhoitracnghiem/model/QuestionGroupModel.java=UTF-8
 encoding//src/main/java/com/xaocauhoitracnghiem/service/IDeGocService.java=UTF-8

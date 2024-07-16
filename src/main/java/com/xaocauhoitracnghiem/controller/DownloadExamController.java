@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.zeroturnaround.zip.ZipUtil;
 
 @WebServlet(urlPatterns = {"/download-exam"})
-public class DownloadExam extends HttpServlet {
+public class DownloadExamController extends HttpServlet {
 	/**
 	 * 
 	 */
@@ -51,6 +51,12 @@ public class DownloadExam extends HttpServlet {
 
         inStream.close();
         outStream.close();
-		
+        
+        File zipFile = new File(zipPath);
+        File ExamListFolder = new File(pathToExamShuffledExam);
+        
+        zipFile.delete();
+        ExamListFolder.delete();
+        
 	}
 }

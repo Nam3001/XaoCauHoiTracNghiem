@@ -65,7 +65,7 @@ public class TronDeController extends HttpServlet {
 		deGoc.thoiGianLamBai = thoiGian;
 
 		TronDeService tronDeService = new TronDeService();
-		List<ExamModel> dsDe = tronDeService.tronDe(deGoc, soLuongDe);
+		List<ExamModel> dsDe = tronDeService.tronDe(deGoc, soLuongDe, coDinhNhom);
 
 
 //		String rootPath = getServletContext().getRealPath("/de-vua-tao");
@@ -88,7 +88,10 @@ public class TronDeController extends HttpServlet {
 		}
 		req.setAttribute("path", dsDe.get(0).getTenSo_PhongGD());
 		req.setAttribute("examList", dsDe);
-		RequestDispatcher rd = req.getRequestDispatcher("/views/web/test.jsp");
-		rd.forward(req, resp);
+//		RequestDispatcher rd = req.getRequestDispatcher("/views/web/test.jsp");
+//		rd.forward(req, resp);
+		
+		session.setAttribute("daTronDe", true);
+		resp.sendRedirect(getServletContext().getContextPath()+"/thong-bao");
 	}
 }

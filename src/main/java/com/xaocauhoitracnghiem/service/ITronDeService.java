@@ -8,6 +8,6 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import com.xaocauhoitracnghiem.model.ExamModel;
 
 public interface ITronDeService {
-	List<ExamModel> tronDe(ExamModel deGoc, int soLuongDe);
+	List<ExamModel> tronDe(ExamModel deGoc, int soLuongDe, boolean coDinhNhom);
 	String generateExamWord(ExamModel exam, String path, String tienToCauHoi, boolean isEnglishExam)  throws Exception;
 }

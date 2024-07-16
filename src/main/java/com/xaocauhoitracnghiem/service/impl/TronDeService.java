@@ -7,6 +7,7 @@ import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -337,7 +338,7 @@ public class TronDeService implements ITronDeService {
 	}
 
 	@Override
-	public List<ExamModel> tronDe(ExamModel deGoc, int soLuongDe) {
+	public List<ExamModel> tronDe(ExamModel deGoc, int soLuongDe, boolean coDinhNhom) {
 		// TODO Auto-generated method stub
 		List<ExamModel> dsDe = new ArrayList<ExamModel>();
 		int countMaDe = 1;
@@ -366,6 +367,10 @@ public class TronDeService implements ITronDeService {
 
 				if (group.getGroupType() == 3 || group.getGroupType() == 1)
 					Collections.shuffle(group.questionList);
+			}
+			
+			if(!coDinhNhom) {
+				Collections.shuffle(exam.getGroupList());
 			}
 
 			dsDe.add(exam);
