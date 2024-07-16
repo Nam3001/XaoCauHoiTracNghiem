@@ -14,30 +14,31 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="<c:url value='/template/web/css/styles.css' />">
+
 </head>
 <body>
-	<!-- Header-->
-	<header class="py-5 ">
-	<div class="container  ">
-		<div class="p-4 p-lg-5 bg-light rounded-3 text-center">
-			<div class="m-4 m-lg-5">
-				<h1 class="display-5 fw-bold">Trộn đề trắc nghiêm Online</h1>
-				<p class="fs-4">Làm khó học sinh, giáo viên dễ chấm</p>
+	<main style="min-height: calc(100vh - 56px - 56px)">
+	<div class="py-5 ">
+		<div class="container">
+			<div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+				<div class="m-4 m-lg-5">
+					<h1 class="display-5 fw-bold">Trộn đề trắc nghiệm Online</h1>
+					<p class="fs-4">Làm khó học sinh, giáo viên dễ chấm</p>
 
-				<form id="form-upload-de-goc" action="upload-de-goc" method="post"
-					enctype="multipart/form-data">
-					<label for="de-goc" class="btn btn-primary btn-lg"> <i
-						class="fa-solid fa-upload"></i> Chọn File
-					</label> <input id="de-goc" name="de-goc" type="file"
-						style="display: none;" accept=".docx">
-				</form>
-				<p class="mt-2">Kéo thả hoặc nhấn chọn</p>
+					<form id="form-upload-de-goc" action="upload-de-goc" method="post"
+						enctype="multipart/form-data">
+						<label for="de-goc" class="btn btn-primary btn-lg"> <i
+							class="fa-solid fa-upload"></i> Chọn File
+						</label> <input id="de-goc" name="de-goc" type="file"
+							style="display: none;" accept=".docx">
+					</form>
+					<p class="mt-2">Kéo thả hoặc nhấn chọn</p>
+				</div>
 			</div>
 		</div>
 	</div>
-	</header>
-	<div class="container p-4 p-lg-5 bg-light rounded-3  ">
-		<div>
+	<div class="container">
+		<div class="p-4 p-lg-5 bg-light rounded-3">
 			<h3 class="text-center">Lưu ý khi tải File lên</h3>
 			<div class="p-3 p-lg-6">
 				<p>• Câu hỏi phải bắt đầu bằng chữ "Câu", ví dụ: Câu 1, Câu
@@ -53,8 +54,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Page Content-->
-	<div class="pt-4">
+	<div class="pt-4 mt-4">
 		<div class="container px-lg-5">
 			<!-- Page Features-->
 			<div class="row gx-lg-5 pt-lg-0 ">
@@ -99,20 +99,41 @@
 			</div>
 		</div>
 	</div>
+	</main>
+	
+	
+	<!-- Modal -->
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="height: 150px">
+				<div class="modal-body d-flex flex-column justify-content-center align-items-center">
+					<div class="spinner-border" role="status">
+						<span class="visually-hidden">Loading...</span>
+					</div>
+					<p>Vui lòng chờ...</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script>
-		
 		function handleFileSelect(e) {
-			form = document.querySelector('#form-upload-de-goc');
+			let form = document.querySelector('#form-upload-de-goc');
+				
+			let modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+			modal.show();
 			form.submit();
 		}
 
-		inputChonFile = document
+		let inputChonFile = document
 				.querySelector('#form-upload-de-goc input[name="de-goc"]');
-		
+
 		window.addEventListener('load', function() {
 			inputChonFile.value = ''
 		})
-		
+
 		inputChonFile.addEventListener('change', handleFileSelect)
 	</script>
 </body>

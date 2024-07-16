@@ -20,21 +20,22 @@ import com.xaocauhoitracnghiem.model.QuestionModel;
 import com.xaocauhoitracnghiem.service.impl.DeGocService;
 
 
-@WebServlet(urlPatterns= {"/xao-cau-hoi"})
-public class XaoCauHoiController extends HttpServlet {
+@WebServlet(urlPatterns= {"/tuy-chinh-xao-cau-hoi"})
+public class TuyChinhXaoCauHoiController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		
 		String path = (String)session.getAttribute("PathOfDeGoc");
 //		String path = "D:\\workspace\\java_eclipse2018\\ThucTapVietNienLuan\\XaoCauHoiTracNghiem\\src\\main\\webapp\\assets\\test.docx";
 		DeGocService degocservice = new DeGocService();
 		ExamModel exam = degocservice.getExamData(path);
-		req.setAttribute("exam", exam);
+		session.setAttribute("exam", exam);
 		
-		req.setAttribute("fileName", Paths.get(path).getFileName());
+		session.setAttribute("deGocFileName", Paths.get(path).getFileName());
 		req.setAttribute("questionAmount", degocservice.getQuestionCount(exam));
 		req.setAttribute("groupAmount", degocservice.getQuestionGroupCount(exam));
 		RequestDispatcher rd = req.getRequestDispatcher("/views/web/tuyChinhXaoCauHoi.jsp");

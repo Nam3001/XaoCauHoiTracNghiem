@@ -29,6 +29,7 @@ public class UploadDeGocController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		/* Receive file uploaded to the Servlet from the HTML5 form */
 	    Part filePart = request.getPart("de-goc");
 	    String realPath = request.getServletContext().getRealPath("/de-goc");
@@ -43,6 +44,6 @@ public class UploadDeGocController extends HttpServlet {
 	    HttpSession session = request.getSession();
 	    
 	    session.setAttribute("PathOfDeGoc", fullPath);
-	    response.sendRedirect(contextPath + "/xao-cau-hoi");
+	    response.sendRedirect(contextPath + "/tuy-chinh-xao-cau-hoi");
 	}
 }

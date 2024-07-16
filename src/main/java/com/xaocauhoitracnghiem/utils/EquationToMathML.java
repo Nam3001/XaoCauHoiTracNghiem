@@ -25,11 +25,12 @@ import org.apache.xmlbeans.XmlCursor;
 import org.openxmlformats.schemas.officeDocument.x2006.math.CTOMath;
 import org.w3c.dom.Node;
 
-import com.xaocauhoitracnghiem.controller.XaoCauHoiController;
+import com.xaocauhoitracnghiem.controller.TuyChinhXaoCauHoiController;
 
 public class EquationToMathML {
-	static String projectDir = XaoCauHoiController.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-	static File stylesheet = new File(projectDir+"../../assets/OMML2MML.XSL");
+	static String projectDir = TuyChinhXaoCauHoiController.class.getProtectionDomain().getCodeSource().getLocation()
+			.getPath();
+	static File stylesheet = new File(projectDir + "../../assets/OMML2MML.XSL");
 	static TransformerFactory tFactory = TransformerFactory.newInstance();
 	static StreamSource stylesource = new StreamSource(stylesheet);
 
@@ -59,7 +60,7 @@ public class EquationToMathML {
 
 		return mathML;
 	}
-	
+
 	// method for getting HTML including MathML from XWPFParagraph
 	public static String getTextAndFormulas(XWPFParagraph paragraph) throws Exception {
 
@@ -95,66 +96,71 @@ public class EquationToMathML {
 		return textWithFormulas.toString();
 	}
 
-	public static void Testing() throws Exception {
-		XWPFDocument document = new XWPFDocument(new FileInputStream("src/test apache poi.docx"));
+	public static void Testing() {
+		try {
+			XWPFDocument document = new XWPFDocument(new FileInputStream("src/test apache poi.docx"));
 
-		// using a StringBuffer for appending all the content as HTML
-		StringBuffer allHTML = new StringBuffer();
+			// using a StringBuffer for appending all the content as HTML
+			StringBuffer allHTML = new StringBuffer();
 
-		// loop over all IBodyElements - should be self explained
-		for (IBodyElement ibodyelement : document.getBodyElements()) {
-			if (ibodyelement.getElementType().equals(BodyElementType.PARAGRAPH)) {
-				XWPFParagraph paragraph = (XWPFParagraph) ibodyelement;
-				allHTML.append("<p>");
-				allHTML.append(getTextAndFormulas(paragraph));
-				allHTML.append("</p>");
-			} else if (ibodyelement.getElementType().equals(BodyElementType.TABLE)) {
-				XWPFTable table = (XWPFTable) ibodyelement;
-				allHTML.append("<table border=1>");
-				for (XWPFTableRow row : table.getRows()) {
-					allHTML.append("<tr>");
-					for (XWPFTableCell cell : row.getTableCells()) {
-						allHTML.append("<td>");
-						for (XWPFParagraph paragraph : cell.getParagraphs()) {
-							allHTML.append("<p>");
-							allHTML.append(getTextAndFormulas(paragraph));
-							allHTML.append("</p>");
+			// loop over all IBodyElements - should be self explained
+			for (IBodyElement ibodyelement : document.getBodyElements()) {
+				if (ibodyelement.getElementType().equals(BodyElementType.PARAGRAPH)) {
+					XWPFParagraph paragraph = (XWPFParagraph) ibodyelement;
+					allHTML.append("<p>");
+					allHTML.append(getTextAndFormulas(paragraph));
+					allHTML.append("</p>");
+				} else if (ibodyelement.getElementType().equals(BodyElementType.TABLE)) {
+					XWPFTable table = (XWPFTable) ibodyelement;
+					allHTML.append("<table border=1>");
+					for (XWPFTableRow row : table.getRows()) {
+						allHTML.append("<tr>");
+						for (XWPFTableCell cell : row.getTableCells()) {
+							allHTML.append("<td>");
+							for (XWPFParagraph paragraph : cell.getParagraphs()) {
+								allHTML.append("<p>");
+								allHTML.append(getTextAndFormulas(paragraph));
+								allHTML.append("</p>");
+							}
+							allHTML.append("</td>");
 						}
-						allHTML.append("</td>");
+						allHTML.append("</tr>");
 					}
-					allHTML.append("</tr>");
+					allHTML.append("</table>");
 				}
-				allHTML.append("</table>");
 			}
+
+			document.close();
+
+			// creating a sample HTML file
+			String encoding = "UTF-8";
+			FileOutputStream fos = new FileOutputStream("src/result.html");
+			OutputStreamWriter writer = new OutputStreamWriter(fos, encoding);
+			writer.write("<!DOCTYPE html>\n");
+			writer.write("<html lang=\"en\">");
+			writer.write("<head>");
+			writer.write("<meta charset=\"utf-8\"/>");
+
+			// using MathJax for helping all browsers to interpret MathML
+			writer.write("<script type=\"text/javascript\"");
+			writer.write(
+					" async src=\"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_CHTML\"");
+			writer.write(">");
+			writer.write("</script>");
+
+			writer.write("</head>");
+			writer.write("<body>");
+
+			writer.write(allHTML.toString());
+
+			writer.write("</body>");
+			writer.write("</html>");
+			writer.close();
+
+			System.out.println(allHTML);
+			Desktop.getDesktop().browse(new File("src/result.html").toURI());
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-
-		document.close();
-
-		// creating a sample HTML file
-		String encoding = "UTF-8";
-		FileOutputStream fos = new FileOutputStream("src/result.html");
-		OutputStreamWriter writer = new OutputStreamWriter(fos, encoding);
-		writer.write("<!DOCTYPE html>\n");
-		writer.write("<html lang=\"en\">");
-		writer.write("<head>");
-		writer.write("<meta charset=\"utf-8\"/>");
-
-		// using MathJax for helping all browsers to interpret MathML
-		writer.write("<script type=\"text/javascript\"");
-		writer.write(" async src=\"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_CHTML\"");
-		writer.write(">");
-		writer.write("</script>");
-
-		writer.write("</head>");
-		writer.write("<body>");
-
-		writer.write(allHTML.toString());
-
-		writer.write("</body>");
-		writer.write("</html>");
-		writer.close();
-
-		System.out.println(allHTML);
-		Desktop.getDesktop().browse(new File("src/result.html").toURI());
 	}
 }
