@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="XaoCauHoiTracNghiem:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>XaoCauHoiTracNghiem</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="XaoCauHoiTracNghiem-1.0.war">
+      <element id="artifact" artifact-name="XaoCauHoiTracNghiem:war exploded" />
+    </root>
+  </artifact>
+</component>

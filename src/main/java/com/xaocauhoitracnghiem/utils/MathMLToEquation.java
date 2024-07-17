@@ -106,8 +106,8 @@ public class MathMLToEquation {
 						contentString += xmlcursor.getTextValue();
 
 						if ((xmlcursor.getTextValue().equals(lastRunContent))) {
-							if (contentString.matches("^(Câu|Question)\\s\\d+[:.].*") && questionLabelCount == 0) {
-								contentString = contentString.replaceAll("^(Câu|Question)\\s\\d+[:.]", "").trim();
+							if (contentString.matches("^(CÃ¢u|Question)\\s\\d+[:.].*") && questionLabelCount == 0) {
+								contentString = contentString.replaceAll("^(CÃ¢u|Question)\\s\\d+[:.]", "").trim();
 								questionLabelCount++;
 							} else if (contentString.matches("^[A-Z]\\..*") && answerLabelCount == 0) {
 								contentString = contentString.replaceAll("^[A-Z]\\.", "").trim();
@@ -121,8 +121,8 @@ public class MathMLToEquation {
 					} else if (xmlcursor.getName().getLocalPart().equalsIgnoreCase("oMath")) {
 						// append contentString to desParagraph
 //						if (desParagraph.getRuns().size() == 0) {
-						if (contentString.matches("^(Câu|Question)\\s\\d+[:.].*") && questionLabelCount == 0) {
-							contentString = contentString.replaceAll("^(Câu|Question)\\s\\d+[:.]", "").trim();
+						if (contentString.matches("^(Cï¿½u|Question)\\s\\d+[:.].*") && questionLabelCount == 0) {
+							contentString = contentString.replaceAll("^(Cï¿½u|Question)\\s\\d+[:.]", "").trim();
 							questionLabelCount++;
 						} else if (contentString.matches("^[A-Z]\\..*") && answerLabelCount == 0) {
 							contentString = contentString.replaceAll("^[A-Z]\\.", "").trim();
@@ -144,8 +144,8 @@ public class MathMLToEquation {
 							&& xmlcursor.getName().getLocalPart().equalsIgnoreCase("drawing")) {
 						// append contentString to desParagraph
 //						if (desParagraph.getRuns().size() == 0) {
-						if (contentString.matches("^(Câu|Question)\\s\\d+[:.].*") && questionLabelCount == 0) {
-							contentString = contentString.replaceAll("^(Câu|Question)\\s\\d+[:.]", "").trim();
+						if (contentString.matches("^(Cï¿½u|Question)\\s\\d+[:.].*") && questionLabelCount == 0) {
+							contentString = contentString.replaceAll("^(Cï¿½u|Question)\\s\\d+[:.]", "").trim();
 							questionLabelCount++;
 						} else if (contentString.matches("^[A-Z]\\..*") && answerLabelCount == 0) {
 							contentString = contentString.replaceAll("^[A-Z]\\.", "").trim();

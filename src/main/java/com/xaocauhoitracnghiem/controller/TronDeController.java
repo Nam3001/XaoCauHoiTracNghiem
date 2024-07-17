@@ -52,7 +52,6 @@ public class TronDeController extends HttpServlet {
 
 		HttpSession session = req.getSession();
 		ExamModel deGoc = (ExamModel) session.getAttribute("exam");
-//		deGoc.setExamInfo(soGD, tenTruong, namHoc, kyKiemTra, monThi, thoiGian);
 		
 		 String deGocFileName = session.getAttribute("deGocFileName").toString();
 		deGocFileName = deGocFileName.substring(0, deGocFileName.length() - 5);
@@ -68,29 +67,24 @@ public class TronDeController extends HttpServlet {
 		List<ExamModel> dsDe = tronDeService.tronDe(deGoc, soLuongDe, coDinhNhom);
 
 
-//		String rootPath = getServletContext().getRealPath("/de-vua-tao");
-		String rootPath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+		String rootPath = getServletContext().getRealPath("/de-vua-tao");
+		if (!Files.exists(Paths.get(rootPath))) {
+			Files.createDirectory(Paths.get(rootPath));
+		}
 
-		List<String> lst = new ArrayList<String>(Arrays.asList(rootPath.trim().split("/")));
-		lst.remove(0);
-		lst.remove(lst.size() - 1);
-		lst.remove(lst.size() - 1);
 
-		String realPath = String.join("/", lst) + "/de-vua-tao/"+deGocFileName;
+		String realPath = rootPath + File.separator + deGocFileName;
 		session.setAttribute("pathToExamShuffledExam", realPath);
-		
 		if (!Files.exists(Paths.get(realPath))) {
 			Files.createDirectory(Paths.get(realPath));
 		}
-
+		
 		for (ExamModel de : dsDe) {
 			tronDeService.generateExamWord(de, realPath + File.separator + "Ma_de_" + de.getMaDe() + ".docx", tienToCauHoi, isEnglishExam);
 		}
 		req.setAttribute("path", dsDe.get(0).getTenSo_PhongGD());
 		req.setAttribute("examList", dsDe);
-//		RequestDispatcher rd = req.getRequestDispatcher("/views/web/test.jsp");
-//		rd.forward(req, resp);
-		
+
 		session.setAttribute("daTronDe", true);
 		resp.sendRedirect(getServletContext().getContextPath()+"/thong-bao");
 	}
