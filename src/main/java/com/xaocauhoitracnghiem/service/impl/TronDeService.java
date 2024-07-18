@@ -1,6 +1,7 @@
 package com.xaocauhoitracnghiem.service.impl;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -11,8 +12,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.wp.usermodel.HeaderFooterType;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFFooter;
@@ -341,32 +345,43 @@ public class TronDeService implements ITronDeService {
 	public List<ExamModel> tronDe(ExamModel deGoc, int soLuongDe, boolean coDinhNhom) {
 		// TODO Auto-generated method stub
 		List<ExamModel> dsDe = new ArrayList<ExamModel>();
-		int countMaDe = 1;
 
-		for (int i = 0; i < soLuongDe; i++) {
+		deGoc.setMaDe("000");
+		dsDe.add(deGoc);
+
+		for (int i = 1; i <= soLuongDe; i++) {
 			ExamModel exam = new ExamModel();
 			exam.clone(deGoc);
 			
 			String maDe = "";
 			
-			if(countMaDe < 10)
-				maDe = "10" + countMaDe;
-			else maDe = "1" + countMaDe;
+			if(i < 10)
+				maDe = "10" + i;
+			else maDe = "1" + i;
 			
 			exam.setMaDe(maDe);
-			countMaDe++;
 
 			for (QuestionGroupModel group : exam.getGroupList()) {
 				if (group.getGroupType() == 0)
 					continue;
 
 				for (QuestionModel question : group.getQuestionList()) {
-					if (group.getGroupType() == 3 || group.getGroupType() == 2)
-						Collections.shuffle(question.answerList);
+					if (group.getGroupType() == 3 || group.getGroupType() == 2) {
+						Collections.shuffle(question.getAnswerList());
+
+						// get right answer index
+						for(int j = 0; j < question.getAnswerList().size(); j++) { // loop through answerList
+							AnswerModel ans = question.getAnswerList().get(j);
+							if(ans.getIsRightAnswer()) {
+								question.setRightAnswerIndex(j+1);
+								break;
+							}
+						}
+					}
 				}
 
 				if (group.getGroupType() == 3 || group.getGroupType() == 1)
-					Collections.shuffle(group.questionList);
+					Collections.shuffle(group.getQuestionList());
 			}
 			
 			if(!coDinhNhom) {
@@ -378,4 +393,88 @@ public class TronDeService implements ITronDeService {
 		return dsDe;
 	}
 
+	@Override
+	public void generateRightAnswerExcel(List<ExamModel> dsDe, String excelPath) {
+		Workbook workbook;
+
+		if(excelPath.endsWith(".xlsx")) {
+			 workbook = new XSSFWorkbook();
+		} else if (excelPath.endsWith("xls")) {
+			workbook = new HSSFWorkbook();
+		} else {
+			throw new IllegalArgumentException("file khong phai excel");
+		}
+
+		Sheet sheet = workbook.createSheet();
+		CellStyle cellStyleCenter = workbook.createCellStyle();
+		cellStyleCenter.setAlignment(HorizontalAlignment.CENTER);
+
+		Row headerRow = sheet.createRow(0);
+		for(int i = 0; i <= dsDe.size(); i++) {
+			Cell cell = headerRow.createCell(i);
+			cell.setCellStyle(cellStyleCenter);
+			if(i == 0) {
+				cell.setCellValue("Câu");
+			} else {
+				cell.setCellValue(dsDe.get(i-1).getMaDe());
+			}
+		}
+
+		int questionCount = 1;
+		int rowCount = 1;
+		for(QuestionGroupModel group : dsDe.get(0).getGroupList()) {
+			for(QuestionModel question : group.getQuestionList()) {
+				Row row = sheet.createRow(rowCount);
+				Cell questionOrderCell = row.createCell(0);
+				questionOrderCell.setCellValue(questionCount);
+				questionOrderCell.setCellStyle(cellStyleCenter);
+
+				Cell dapAnDeGocCell = row.createCell(1);
+				if(question.getRightAnswerIndex() == 0)
+					dapAnDeGocCell.setCellValue("_");
+				else
+					dapAnDeGocCell.setCellValue(CommonUtils.numToLetterBySubstr(question.getRightAnswerIndex()));
+				dapAnDeGocCell.setCellStyle(cellStyleCenter);
+
+				questionCount++;
+				rowCount++;
+			}
+		}
+
+		for(int i = 1; i < dsDe.size(); i++) {
+			rowCount = 1;
+			ExamModel exam = dsDe.get(i);
+			for(QuestionGroupModel group : exam.getGroupList()) {
+				for(QuestionModel question : group.getQuestionList()) {
+					Row row = sheet.getRow(rowCount);
+					Cell answerCell = row.createCell(i+1);
+					answerCell.setCellStyle(cellStyleCenter);
+
+					if(question.getRightAnswerIndex() == 0) {
+						answerCell.setCellValue("_");
+					} else {
+						answerCell.setCellValue(CommonUtils.numToLetterBySubstr(question.getRightAnswerIndex()));
+					}
+					rowCount++;
+				}
+			}
+		}
+
+		if(!Files.exists(Paths.get(excelPath))) {
+			try {
+				Files.createFile(Paths.get(excelPath));
+			} catch (IOException e) {
+				System.out.println(e.getStackTrace());
+			}
+		}
+
+		try {
+			FileOutputStream out = new FileOutputStream(new File(excelPath));
+			workbook.write(out);
+		} catch(FileNotFoundException e) {
+			System.out.println(e.getStackTrace());
+		} catch (IOException e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
 }
