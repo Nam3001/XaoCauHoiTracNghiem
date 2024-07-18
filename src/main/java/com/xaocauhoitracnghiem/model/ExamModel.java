@@ -74,8 +74,17 @@ public class ExamModel {
 	public String thoiGianLamBai; // thoi gian lam bai
 	public String tenTruong;
 	public String maDe;
-	
-	
+
+	private List<QuestionModel> questionHaveMultiRightAnswerlist = new ArrayList<QuestionModel>();
+
+	public List<QuestionModel> getQuestionHaveMultiRightAnswerlist() {
+		return questionHaveMultiRightAnswerlist;
+	}
+
+	public void setQuestionHaveMultiRightAnswerlist(List<QuestionModel> questionHaveMultiRightAnswerlist) {
+		this.questionHaveMultiRightAnswerlist = questionHaveMultiRightAnswerlist;
+	}
+
 	public void setExamInfo(String soGD, String tenTruong, String namHoc, String hocKy, String monKT, String thoiGian) {
 		this.tenSo_PhongGD = soGD;
 		this.tenTruong = tenTruong;
@@ -103,6 +112,7 @@ public class ExamModel {
 			for(QuestionModel question : group.getQuestionList()) {
 				QuestionModel newQuestion = new QuestionModel();
 				newQuestion.setQuestionOrder(question.getQuestionOrder());
+				newQuestion.setRightAnswerIndex(question.getRightAnswerIndex());
 				
 				for(AnswerModel answer : question.getAnswerList()) {
 					AnswerModel newAnswer = new AnswerModel();

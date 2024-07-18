@@ -78,12 +78,16 @@ public class TronDeController extends HttpServlet {
 		if (!Files.exists(Paths.get(realPath))) {
 			Files.createDirectory(Paths.get(realPath));
 		}
-		
+
+		// tao de moi
 		for (ExamModel de : dsDe) {
 			tronDeService.generateExamWord(de, realPath + File.separator + "Ma_de_" + de.getMaDe() + ".docx", tienToCauHoi, isEnglishExam);
 		}
-		req.setAttribute("path", dsDe.get(0).getTenSo_PhongGD());
-		req.setAttribute("examList", dsDe);
+		// tao file chua dap an
+		tronDeService.generateRightAnswerExcel(dsDe, realPath + File.separator + "dap_an.xlsx");
+
+//		req.setAttribute("path", dsDe.get(0).getTenSo_PhongGD());
+//		req.setAttribute("examList", dsDe);
 
 		session.setAttribute("daTronDe", true);
 		resp.sendRedirect(getServletContext().getContextPath()+"/thong-bao");

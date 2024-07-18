@@ -76,6 +76,7 @@ public class DeGocService implements IDeGocService {
 		// tạo 1 group
 		int countRow = 1;
 		int questionCount = 1;
+		int answerCount = 0;
 		for (XWPFParagraph p : doc.getParagraphs()) {
 //			if(p.getText().length() == 0) continue;
 			if (countRow == 1 && !isGroupQuestionParagraph(p)) {
@@ -114,9 +115,11 @@ public class DeGocService implements IDeGocService {
 					lastGroup.questionList.add(question);
 
 					lastestElement = p;
+					answerCount = 0;
 				}
 			} else if (isAnswerParagraph(p)) {
 				if (exam.groupList.size() > 0) {
+					answerCount++;
 					QuestionGroupModel lastGroup = exam.groupList.get(exam.groupList.size() - 1);
 					QuestionModel lastQuestionOfLastGroup;
 					if (lastGroup.questionList.size() > 0) {
@@ -124,11 +127,20 @@ public class DeGocService implements IDeGocService {
 						AnswerModel answer = new AnswerModel();
 						answer.content = p;
 
-						if (isRightAnswerParagraph(p)) {
+						boolean rightAnswer = isRightAnswerParagraph(p);
+						if (rightAnswer) {
 							answer.isRightAnswer = true;
+							lastQuestionOfLastGroup.setRightAnswerIndex(answerCount);
 						}
 
 						lastQuestionOfLastGroup.answerList.add(answer);
+
+						int questionMultiRightAnsSize = exam.getQuestionHaveMultiRightAnswerlist().size();
+						if ((rightAnswer && questionMultiRightAnsSize > 0 && exam.getQuestionHaveMultiRightAnswerlist().get(questionMultiRightAnsSize - 1) != lastQuestionOfLastGroup) || (rightAnswer && questionMultiRightAnsSize == 0)) {
+							if(lastQuestionOfLastGroup.checkMultiRightAnswer()) {
+								exam.getQuestionHaveMultiRightAnswerlist().add(lastQuestionOfLastGroup);
+							}
+						}
 					}
 				}
 
@@ -152,7 +164,10 @@ public class DeGocService implements IDeGocService {
 			// tang so dong len;
 			countRow++;
 		}
-		
+
+		for(QuestionModel question : exam.getQuestionHaveMultiRightAnswerlist()) {
+			question.removeMultiRightAnswer();
+		}
 //		doc.close();
 		return exam;
 	}
