@@ -17,7 +17,7 @@
 
 </head>
 <body>
-	<main style="min-height: calc(100vh - 56px - 56px)">
+	<main style="min-height: calc(100vh - 56px - 80px)">
 	<div class="py-5 ">
 		<div class="container">
 			<div class="p-4 p-lg-5 bg-light rounded-3 text-center">
