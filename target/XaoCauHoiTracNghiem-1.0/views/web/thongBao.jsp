@@ -10,7 +10,7 @@
 
 </head>
 <body>
-	<main style="min-height: calc(100vh - 56px - 56px)">
+	<main style="min-height: calc(100vh - 56px - 80px)">
 	<div class="py-5 ">
 		<c:if test="${ daTronDe == true }">
 			<form id="download-form" action="download-exam" method="get"></form>

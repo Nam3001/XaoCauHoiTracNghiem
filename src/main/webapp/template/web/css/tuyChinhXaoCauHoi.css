@@ -1,29 +1,35 @@
 @charset "UTF-8";
 @media only screen and (min-width: 992px) {
     #sidebar, #content {
-        overflow-y: auto;
-        max-height: calc(100vh - 56px - 56px);
+        max-height: calc(100vh - 56px - 80px);
     }
     #sidebar {
         width: 380px;
     }
     #content {
+        overflow-y: auto;
         width: calc(100vw - 380px);
+    }
+
+    #sidebar .sidebar-body {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        max-height: calc(100vh - 56px - 80px - 55px);
     }
 }
 
 
-#sidebar::-webkit-scrollbar {
+#sidebar .sidebar-body::-webkit-scrollbar {
     width: 5px;
     background-color: rgba(169, 169, 169, 0.5);
     display: none;
 }
 
-#sidebar::-webkit-scrollbar-track {
+#sidebar .sidebar-body::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
 }
 
-#sidebar::-webkit-scrollbar-thumb {
+#sidebar .sidebar-body::-webkit-scrollbar-thumb {
     background-color: rgb(169, 169, 169);
     border-radius: 2px;
     width: 3px;
