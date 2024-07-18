@@ -23,7 +23,7 @@
 			<div class="p-4 p-lg-5 bg-light rounded-3 text-center">
 				<div class="m-4 m-lg-5">
 					<h1 class="display-5 fw-bold">Trộn đề trắc nghiệm Online</h1>
-					<p class="fs-4">Làm khó học sinh, giáo viên dễ chấm</p>
+					<p class="fs-4">Tiện ích, nhanh gọn và đơn giản</p>
 
 					<form id="form-upload-de-goc" action="upload-de-goc" method="post"
 						enctype="multipart/form-data">
@@ -44,9 +44,9 @@
 				<p>• Câu hỏi phải bắt đầu bằng chữ "Câu", ví dụ: Câu 1, Câu
 					2,.... (Hoặc chữ "Question", ví dụ: Question 1, Question 2,...).</p>
 				<p>• Phải xuống dòng (gỗ Enter) trước khi gõ các đáp án.</p>
-				<p>• Các đáp án bắt buộc phải được bắt đầu bằng các từ "A", "B",
+				<p>• Các đáp án bắt buộc phải được bắt đầu bằng các từ "A.", "B.",
 					"C.", "D.".</p>
-				<p>• Mỗi đáp án nên nằm trên một dòng (không bắt buộc, nhưng sẽ
+				<p>• Mỗi đáp án nên nằm trên một dòng (Giúp
 					nhận dạng chính xác hơn)</p>
 				<p>• Các câu hỏi và đáp án có Hình ảnh thì Hình ảnh cần để ở chế
 					độ Inline With Text (để sau này đề hoán vị, hình ảnh không bị nhảy
@@ -67,7 +67,7 @@
 								<i class="bi bi-cloud-download"></i>
 							</div>
 							<h2 class="fs-4 fw-bold">Tải xuống nhanh chóng</h2>
-							<p class="mb-0">tiện lợi, nhanh gọn, dễ dàng sử dụng</p>
+							<p class="mb-0">Tải xuống nhanh, không cần nhiều thao tác.</p>
 						</div>
 					</div>
 				</div>
@@ -79,7 +79,7 @@
 								<i class="fa-solid fa-bolt"></i>
 							</div>
 							<h2 class="fs-4 fw-bold">Xử lý Online</h2>
-							<p class="mb-0">tiện lợi, nhanh gọn, dễ dàng sử dụng</p>
+							<p class="mb-0">Xử lý dữ liệu đám mây, nhanh chóng, đơn giản.</p>
 						</div>
 					</div>
 				</div>
@@ -91,7 +91,7 @@
 								<i class="fa-solid fa-bolt"></i>
 							</div>
 							<h2 class="fs-4 fw-bold">An toàn</h2>
-							<p class="mb-0">tiện lợi, nhanh gọn, dễ dàng sử dụng</p>
+							<p class="mb-0">Sử dụng an toàn, uy tín, đảm bảo chất lượng.</p>
 						</div>
 					</div>
 				</div>
