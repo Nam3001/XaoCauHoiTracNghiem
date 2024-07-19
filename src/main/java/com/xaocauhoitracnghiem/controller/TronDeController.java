@@ -1,7 +1,9 @@
 package com.xaocauhoitracnghiem.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,6 +23,8 @@ import com.xaocauhoitracnghiem.model.ExamModel;
 import com.xaocauhoitracnghiem.model.QuestionGroupModel;
 import com.xaocauhoitracnghiem.service.impl.DeGocService;
 import com.xaocauhoitracnghiem.service.impl.TronDeService;
+import org.apache.commons.io.FileUtils;
+import org.zeroturnaround.zip.ZipUtil;
 
 @WebServlet(urlPatterns = { "/tron-de" })
 public class TronDeController extends HttpServlet {
@@ -86,10 +90,6 @@ public class TronDeController extends HttpServlet {
 		// tao file chua dap an
 		tronDeService.generateRightAnswerExcel(dsDe, realPath + File.separator + "dap_an.xlsx");
 
-//		req.setAttribute("path", dsDe.get(0).getTenSo_PhongGD());
-//		req.setAttribute("examList", dsDe);
-
-		session.setAttribute("daTronDe", true);
-		resp.sendRedirect(getServletContext().getContextPath()+"/thong-bao");
+		resp.sendRedirect(getServletContext().getContextPath() + "/download-exam");
 	}
 }

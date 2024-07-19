@@ -337,6 +337,8 @@ public class TronDeService implements ITronDeService {
 		File f = new File(path);
 		FileOutputStream out = new FileOutputStream(f);
 		document.write(out);
+
+		out.close();
 		document.close();
 		return null;
 	}
@@ -390,6 +392,8 @@ public class TronDeService implements ITronDeService {
 
 			dsDe.add(exam);
 		}
+
+
 		return dsDe;
 	}
 
@@ -471,8 +475,14 @@ public class TronDeService implements ITronDeService {
 		try {
 			FileOutputStream out = new FileOutputStream(new File(excelPath));
 			workbook.write(out);
+			out.close();
 		} catch(FileNotFoundException e) {
 			System.out.println(e.getStackTrace());
+		} catch (IOException e) {
+			System.out.println(e.getStackTrace());
+		}
+		try {
+			workbook.close();
 		} catch (IOException e) {
 			System.out.println(e.getStackTrace());
 		}

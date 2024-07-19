@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet(urlPatterns = {"/thong-bao"})
@@ -22,6 +23,5 @@ public class ThongBaoController extends HttpServlet {
 		// TODO Auto-generated method stub
 		RequestDispatcher rd = req.getRequestDispatcher("/views/web/thongBao.jsp");
 		rd.forward(req, resp);
-
 	}
 }

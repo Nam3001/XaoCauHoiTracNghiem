@@ -7,11 +7,9 @@ import java.io.OutputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
+import org.apache.commons.io.FileUtils;
 import org.zeroturnaround.zip.ZipUtil;
 
 @WebServlet(urlPatterns = {"/download-exam"})
@@ -38,6 +36,11 @@ public class DownloadExamController extends HttpServlet {
         response.setContentLength((int) downloadFile.length());
         response.setHeader("Content-Disposition", "attachment; filename=\"" + downloadFile.getName() + "\"");
 
+        // Đặt cookie để báo hiệu hoàn tất tải file
+        Cookie cookie = new Cookie("fileDownload", "true");
+        cookie.setPath("/");
+        cookie.setMaxAge(60); // Cookie sẽ tồn tại trong 60 giây
+        response.addCookie(cookie);
         
         OutputStream outStream = response.getOutputStream();
 
@@ -51,12 +54,11 @@ public class DownloadExamController extends HttpServlet {
 
         inStream.close();
         outStream.close();
-        
+
         File zipFile = new File(zipPath);
         File ExamListFolder = new File(pathToExamShuffledExam);
         
         zipFile.delete();
-        ExamListFolder.delete();
-        
+        FileUtils.deleteDirectory(ExamListFolder);
 	}
 }
