@@ -13,18 +13,29 @@
 <body>
 <main class="container-fluid d-lg-flex flex-row m-0 p-0 ">
     <div id="sidebar" class="bg-dark text-white col-12 py-3">
-        <form action="tron-de" method="post" accept-charset="utf-8">
-            <div class="sidebar-body px-3">
 
+        <div class="sidebar-body px-3">
+            <form id="form-upload-de-goc" action="upload-de-goc" method="post" enctype="multipart/form-data">
                 <div class="d-flex justify-content-center mb-3">
-                    <button class="btn btn-light w-50">
-                        <i class="fa-solid fa-upload"></i> <span>Đề cần trộn</span>
-                    </button>
+                    <label for="de-goc" class="btn btn-light w-50">
+                        <i class="fa-solid fa-upload"></i>
+                        <span>Đề cần trộn</span>
+                    </label>
+                    <input id="de-goc" name="de-goc" type="file" style="display: none;" accept=".docx">
                 </div>
+            </form>
+            <form action="tron-de" method="post" accept-charset="utf-8">
                 <div class="section mt-3">
                     <h2>Thông tin file gốc</h2>
                     <ul>
-                        <li>Tên File: <span>${ deGocFileName }</span></li>
+                        <c:choose>
+                            <c:when test="${deGocFileName != ''}">
+                                <li>Tên File: <span>${ deGocFileName }</span></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li>Tên File: <span>Bạn chưa tải đề gốc!</span></li>
+                            </c:otherwise>
+                        </c:choose>
                         <li>Số lượng câu hỏi: <span>${ questionAmount }</span></li>
                         <li>Số nhóm: <span>${ groupAmount }</span></li>
                     </ul>
@@ -147,16 +158,16 @@
                     </div>
 
                 </div>
+            </form>
 
+        </div>
+        <div class="sidebar-footer">
+            <div class="d-flex justify-content-center mt-2">
+                <button id="tron-de" class="btn btn-light w-50 ">
+                    <i class="fa-solid fa-download"></i> <span>Trộn đề</span>
+                </button>
             </div>
-            <div class="sidebar-footer">
-                <div class="d-flex justify-content-center mt-2">
-                    <button id="tron-de" class="btn btn-light w-50 ">
-                        <i class="fa-solid fa-download"></i> <span>Trộn đề</span>
-                    </button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 
     <div id="content" class="col-12">
@@ -214,26 +225,47 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 
-    var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+    let modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
 
     window.onload = function () {
-        var perfEntries = performance.getEntriesByType("navigation");
-
-        if (perfEntries[0].type === "back_forward") {
-            location.reload();
-        }
-
-        console.log('hide')
+        console.log('load')
         modal.hide();
     }
-
+    console.log('da tron xong' + '${daTronXong}')
     var form = document.querySelector('form[action="tron-de"]');
     var tronDeBtn = document.getElementById('tron-de');
     tronDeBtn.addEventListener('click', function (e) {
         e.preventDefault();
+        if ('${deGocFileName}' === '') {
+            alert('Bạn chưa tải đề gốc lên, hãy tải đề gốc!')
+        } else {
+            let intervalID = setInterval(function() {
+                console.log('interval')
+                var cookie = document.cookie.split('; ').find(row => row.startsWith('fileDownload=true'));
+                if (cookie) {
+                    clearInterval(intervalID);
+                    document.cookie = 'fileDownload=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                    clearInterval(intervalID)
+                    window.location.href = '${contextPath}' + '/thong-bao';
+                }
+            }, 1000);
+
+            modal.show();
+            form.submit();
+        }
+    })
+
+    function handleFileSelect(e) {
+        let form = document.querySelector('#form-upload-de-goc');
+
+        console.log("change")
+        let modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
         modal.show();
         form.submit();
-    })
+    }
+
+    let inputChonFile = document.querySelector('#form-upload-de-goc input[name="de-goc"]');
+    inputChonFile.addEventListener('change', handleFileSelect)
 </script>
 </body>
 </html>

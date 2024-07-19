@@ -3,6 +3,8 @@ package com.xaocauhoitracnghiem.service.impl;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +19,8 @@ import com.xaocauhoitracnghiem.model.QuestionGroupModel;
 import com.xaocauhoitracnghiem.model.QuestionModel;
 import com.xaocauhoitracnghiem.service.IDeGocService;
 import com.xaocauhoitracnghiem.utils.ReadDeGoc;
+
+import javax.servlet.http.HttpSession;
 
 public class DeGocService implements IDeGocService {
 	@Override
@@ -168,7 +172,7 @@ public class DeGocService implements IDeGocService {
 		for(QuestionModel question : exam.getQuestionHaveMultiRightAnswerlist()) {
 			question.removeMultiRightAnswer();
 		}
-//		doc.close();
+		doc.close();
 		return exam;
 	}
 

@@ -8,6 +8,8 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
 import com.xaocauhoitracnghiem.model.ExamModel;
 
+import javax.servlet.http.HttpSession;
+
 public interface IDeGocService {
 	// đọc file .docx và lấy dữ liệu trong đề gốc
 	ExamModel getExamData(String path) throws FileNotFoundException, IOException;

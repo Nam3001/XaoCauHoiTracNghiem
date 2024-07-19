@@ -1,6 +1,7 @@
 package com.xaocauhoitracnghiem.controller;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -29,16 +30,26 @@ public class TuyChinhXaoCauHoiController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		
-		String path = (String)session.getAttribute("PathOfDeGoc");
+		String path = session.getAttribute("PathOfDeGoc") != null ? session.getAttribute("PathOfDeGoc").toString() : "";
 //		String path = "D:\\workspace\\java_eclipse2018\\ThucTapVietNienLuan\\XaoCauHoiTracNghiem\\src\\main\\webapp\\assets\\test.docx";
 		DeGocService degocservice = new DeGocService();
-		ExamModel exam = degocservice.getExamData(path);
+		ExamModel exam = new ExamModel();
+		if(!path.equals("")) {
+			exam = degocservice.getExamData(path);
+		}
 		session.setAttribute("exam", exam);
 		
 		session.setAttribute("deGocFileName", Paths.get(path).getFileName());
 		req.setAttribute("questionAmount", degocservice.getQuestionCount(exam));
 		req.setAttribute("groupAmount", degocservice.getQuestionGroupCount(exam));
+
+		req.setAttribute("contextPath", getServletContext().getContextPath());
 		RequestDispatcher rd = req.getRequestDispatcher("/views/web/tuyChinhXaoCauHoi.jsp");
 		rd.forward(req, resp);
+
+		if(!path.isEmpty()) {
+			Files.deleteIfExists(Paths.get(path));
+			session.removeAttribute("PathOfDeGoc");
+		}
 	}
 }
