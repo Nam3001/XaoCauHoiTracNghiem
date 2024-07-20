@@ -42,7 +42,6 @@
 	<script type="text/javascript"
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
-	<script type="text/javascript" src="<c:url value='/template/web/js/scripts.js' />"></script>
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.7.1.min.js"
 		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
