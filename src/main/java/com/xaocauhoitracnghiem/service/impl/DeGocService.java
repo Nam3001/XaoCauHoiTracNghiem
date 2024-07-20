@@ -9,14 +9,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.xaocauhoitracnghiem.model.*;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
-import com.xaocauhoitracnghiem.model.AnswerModel;
-import com.xaocauhoitracnghiem.model.ExamModel;
-import com.xaocauhoitracnghiem.model.QuestionGroupModel;
-import com.xaocauhoitracnghiem.model.QuestionModel;
 import com.xaocauhoitracnghiem.service.IDeGocService;
 import com.xaocauhoitracnghiem.utils.ReadDeGoc;
 
@@ -66,9 +63,10 @@ public class DeGocService implements IDeGocService {
 	}
 
 	@Override
-	public ExamModel getExamData(String path) throws FileNotFoundException, IOException {
-		ExamModel exam = new ExamModel();
+	public OriginalExamModel getExamData(String path) throws FileNotFoundException, IOException {
+		OriginalExamModel exam = new OriginalExamModel();
 		XWPFDocument doc = new XWPFDocument(new FileInputStream(path));
+		exam.setDocumentOfExam(doc);
 
 		// dùng để sử dụng khi paragraph không phải là group/question/answer. thì sẽ
 		// thêm paragraph này vào group/question gần nhấn
@@ -172,7 +170,7 @@ public class DeGocService implements IDeGocService {
 		for(QuestionModel question : exam.getQuestionHaveMultiRightAnswerlist()) {
 			question.removeMultiRightAnswer();
 		}
-		doc.close();
+//		doc.close();
 		return exam;
 	}
 

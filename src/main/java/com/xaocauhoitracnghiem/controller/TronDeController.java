@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.xaocauhoitracnghiem.model.ExamModel;
+import com.xaocauhoitracnghiem.model.OriginalExamModel;
 import com.xaocauhoitracnghiem.model.QuestionGroupModel;
 import com.xaocauhoitracnghiem.service.impl.DeGocService;
 import com.xaocauhoitracnghiem.service.impl.TronDeService;
@@ -55,7 +56,7 @@ public class TronDeController extends HttpServlet {
 		String namHoc = req.getParameter("nam-hoc");
 
 		HttpSession session = req.getSession();
-		ExamModel deGoc = (ExamModel) session.getAttribute("exam");
+		OriginalExamModel deGoc = (OriginalExamModel) session.getAttribute("exam");
 		
 		 String deGocFileName = session.getAttribute("deGocFileName").toString();
 		deGocFileName = deGocFileName.substring(0, deGocFileName.length() - 5);
@@ -89,6 +90,8 @@ public class TronDeController extends HttpServlet {
 		}
 		// tao file chua dap an
 		tronDeService.generateRightAnswerExcel(dsDe, realPath + File.separator + "dap_an.xlsx");
+
+		deGoc.getDocumentOfExam().close();
 
 		resp.sendRedirect(getServletContext().getContextPath() + "/download-exam");
 	}

@@ -162,7 +162,7 @@ public class MathMLToEquation {
 						for (XWPFRun run : srcParagraph.getRuns()) {
 							picLst.addAll(run.getEmbeddedPictures());
 						}
-
+						
 						XWPFPictureData picData = picLst.get(pictureCount).getPictureData();
 						InputStream rawPicData = new ByteArrayInputStream(picData.getData());
 						int pictureType = picData.getPictureType();
@@ -177,8 +177,8 @@ public class MathMLToEquation {
 //							ratio = (double) imgBuffer.getHeight() / imgBuffer.getWidth();
 //							imageHeight = (int) (imageWidth * ratio);
 //						}
-						imageWidth = (int) picLst.get(pictureCount).getCTPicture().getSpPr().getXfrm().getExt().getCx() / 14500;
-						imageHeight = (int) picLst.get(pictureCount).getCTPicture().getSpPr().getXfrm().getExt().getCy() / 14500;
+						imageWidth = (int) picLst.get(pictureCount).getCTPicture().getSpPr().getXfrm().getExt().getCx() / 14000;
+						imageHeight = (int) picLst.get(pictureCount).getCTPicture().getSpPr().getXfrm().getExt().getCy() / 14000;
 
 						File tempImageFile = File.createTempFile("image", "jpg");
 						FileOutputStream tempOut = new FileOutputStream(tempImageFile);

@@ -14,10 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.xaocauhoitracnghiem.model.AnswerModel;
-import com.xaocauhoitracnghiem.model.ExamModel;
-import com.xaocauhoitracnghiem.model.QuestionGroupModel;
-import com.xaocauhoitracnghiem.model.QuestionModel;
+import com.xaocauhoitracnghiem.model.*;
 import com.xaocauhoitracnghiem.service.impl.DeGocService;
 
 
@@ -31,9 +28,8 @@ public class TuyChinhXaoCauHoiController extends HttpServlet {
 		HttpSession session = req.getSession();
 		
 		String path = session.getAttribute("PathOfDeGoc") != null ? session.getAttribute("PathOfDeGoc").toString() : "";
-//		String path = "D:\\workspace\\java_eclipse2018\\ThucTapVietNienLuan\\XaoCauHoiTracNghiem\\src\\main\\webapp\\assets\\test.docx";
 		DeGocService degocservice = new DeGocService();
-		ExamModel exam = new ExamModel();
+		OriginalExamModel exam = new OriginalExamModel();
 		if(!path.equals("")) {
 			exam = degocservice.getExamData(path);
 		}
