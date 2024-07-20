@@ -153,12 +153,12 @@ public class TronDeService implements ITronDeService {
 		tbl.setInsideVBorder(null, 0, 0, null);
 	}
 
-	private void generateAnswer(XWPFDocument document, QuestionModel question, int numberQuestionEachRow) {
+	private void generateAnswer(XWPFDocument document, QuestionModel question, int numberAnswerEachRow) {
 		try {
 			List<AnswerModel> answerList = question.answerList;
 
-			int amountOfRow = answerList.size() % numberQuestionEachRow == 0 ? answerList.size() / numberQuestionEachRow
-					: answerList.size() / numberQuestionEachRow + 1;
+			int amountOfRow = answerList.size() % numberAnswerEachRow == 0 ? answerList.size() / numberAnswerEachRow
+					: answerList.size() / numberAnswerEachRow + 1;
 
 			XWPFTable tbl = document.createTable();
 			tbl.setWidth("100%");
@@ -173,7 +173,7 @@ public class TronDeService implements ITronDeService {
 					row = tbl.getRow(0);
 
 					row.removeCell(0);
-					for (int j = 0; j < numberQuestionEachRow; j++) {
+					for (int j = 0; j < numberAnswerEachRow; j++) {
 						if (countAnswer >= answerList.size())
 							break;
 
@@ -199,7 +199,7 @@ public class TronDeService implements ITronDeService {
 				} else {
 					row = tbl.getRow(i);
 
-					for (int j = 0; j < numberQuestionEachRow; j++) {
+					for (int j = 0; j < numberAnswerEachRow; j++) {
 						if (countAnswer >= answerList.size())
 							break;
 
@@ -317,7 +317,16 @@ public class TronDeService implements ITronDeService {
 						run.setFontSize(12);
 					}
 				}
-				generateAnswer(document, question, 2);
+				int answerEachRow = 4;
+				for(AnswerModel ans : question.getAnswerList()) {
+					if(ans.getContent().getText().length() > 40) {
+						answerEachRow = 1;  // 1 dap an 1 hang
+						break;
+					} else if(ans.getContent().getText().length() > 20) {
+						answerEachRow = 2;
+					} else answerEachRow = 4;
+				}
+				generateAnswer(document, question, answerEachRow);
 			}
 		}
 		

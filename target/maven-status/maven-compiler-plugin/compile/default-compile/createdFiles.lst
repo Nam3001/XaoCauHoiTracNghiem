@@ -3,8 +3,8 @@ com\xaocauhoitracnghiem\controller\TronDeController.class
 com\xaocauhoitracnghiem\controller\ThongBaoController.class
 com\xaocauhoitracnghiem\service\impl\DeGocService.class
 com\xaocauhoitracnghiem\service\ITronDeService.class
-TestController.class
 com\xaocauhoitracnghiem\controller\DownloadExamController.class
+com\xaocauhoitracnghiem\model\OriginalExamModel.class
 com\xaocauhoitracnghiem\utils\EquationToMathML.class
 com\xaocauhoitracnghiem\model\QuestionGroupModel.class
 com\xaocauhoitracnghiem\utils\CommonUtils.class

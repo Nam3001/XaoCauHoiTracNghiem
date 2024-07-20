@@ -33,7 +33,7 @@ public class UploadDeGocController extends HttpServlet {
 		/* Receive file uploaded to the Servlet from the HTML5 form */
 	    Part filePart = request.getPart("de-goc");
 	    String realPath = request.getServletContext().getRealPath("/de-goc");
-	    String fileName = filePart.getSubmittedFileName();
+	    String fileName = UUID.randomUUID() + "_" + filePart.getSubmittedFileName();
 	    if (!Files.exists(Paths.get(realPath))) {
 	    	Files.createDirectory(Paths.get(realPath));
 	    }
@@ -42,7 +42,7 @@ public class UploadDeGocController extends HttpServlet {
 	    filePart.write(fullPath);
 	    String contextPath = request.getServletContext().getContextPath();
 	    HttpSession session = request.getSession();
-	    
+
 	    session.setAttribute("PathOfDeGoc", fullPath);
 	    response.sendRedirect(contextPath + "/tuy-chinh-xao-cau-hoi");
 	}
