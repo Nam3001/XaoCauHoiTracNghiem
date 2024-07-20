@@ -1,6 +1,7 @@
 package com.xaocauhoitracnghiem.utils;
 
 import java.util.List;
+import java.util.Random;
 
 public class CommonUtils {
 	public static String numToLetterBySubstr(int i) {
@@ -11,7 +12,14 @@ public class CommonUtils {
 	        return "?";
 	    }
 	}
-	public static void shuffle(List lst) {
-		
+	public static <T> void shuffle(List<T> lst) {
+		Random rand = new Random();
+		for (int i = lst.size() - 1; i >= 0; i--) {
+			int j = rand.nextInt(i+1);
+
+			T tmp = lst.get(i);
+			lst.set(i, lst.get(j));
+			lst.set(j, tmp);
+		}
 	}
 }

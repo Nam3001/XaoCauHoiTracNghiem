@@ -378,7 +378,8 @@ public class TronDeService implements ITronDeService {
 
 				for (QuestionModel question : group.getQuestionList()) {
 					if (group.getGroupType() == 3 || group.getGroupType() == 2) {
-						Collections.shuffle(question.getAnswerList());
+//						Collections.shuffle(question.getAnswerList());
+						CommonUtils.shuffle(question.getAnswerList());
 
 						// get right answer index
 						for(int j = 0; j < question.getAnswerList().size(); j++) { // loop through answerList
@@ -391,12 +392,15 @@ public class TronDeService implements ITronDeService {
 					}
 				}
 
-				if (group.getGroupType() == 3 || group.getGroupType() == 1)
-					Collections.shuffle(group.getQuestionList());
+				if (group.getGroupType() == 3 || group.getGroupType() == 1) {
+//					Collections.shuffle(group.getQuestionList());
+					CommonUtils.shuffle(group.getQuestionList());
+				}
 			}
 			
 			if(!coDinhNhom) {
-				Collections.shuffle(exam.getGroupList());
+//				Collections.shuffle(exam.getGroupList());
+				CommonUtils.shuffle(exam.getGroupList());
 			}
 
 			dsDe.add(exam);
