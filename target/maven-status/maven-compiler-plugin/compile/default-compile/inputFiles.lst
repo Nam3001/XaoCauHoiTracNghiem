@@ -1,6 +1,7 @@
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\service\impl\TronDeService.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\model\QuestionGroupModel.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\controller\DownloadExamController.java
+D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\controller\DownloadSampleController.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\utils\CommonUtils.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\utils\ReadDeGoc.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\service\ITronDeService.java
@@ -16,4 +17,5 @@ D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\j
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\model\OriginalExamModel.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\controller\HomeController.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\utils\EquationToMathML.java
+D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\model\SampleExamModel.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\model\AnswerModel.java

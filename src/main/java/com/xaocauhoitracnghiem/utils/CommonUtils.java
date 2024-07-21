@@ -1,5 +1,10 @@
 package com.xaocauhoitracnghiem.utils;
 
+import com.xaocauhoitracnghiem.model.SampleExamModel;
+
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -21,5 +26,33 @@ public class CommonUtils {
 			lst.set(i, lst.get(j));
 			lst.set(j, tmp);
 		}
+	}
+
+	public static String stripExtension(String str) {
+		if (str == null) return null;
+
+		int pos = str.indexOf(".");
+		if(pos == -1) return str;
+
+		return str.substring(0, pos);
+	}
+
+	public static List<SampleExamModel> getSampleExamList(String path) {
+		final File folder = new File(path);
+		List<SampleExamModel> sampleExamList = new ArrayList<SampleExamModel>();
+
+		if(folder.isDirectory()) {
+			for(final File file : folder.listFiles()) {
+				String fileName = Paths.get(file.getPath()).getFileName().toString();
+				String fileNameWithoutExtension = stripExtension(fileName);
+
+				String pathToSample = file.getPath();
+				SampleExamModel sample = new SampleExamModel(fileNameWithoutExtension, pathToSample);
+				sampleExamList.add(sample);
+			}
+		} else {
+			System.out.println("the path isn't a path to folder");
+		}
+		return sampleExamList;
 	}
 }
