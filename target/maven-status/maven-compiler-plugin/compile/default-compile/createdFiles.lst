@@ -5,7 +5,6 @@ com\xaocauhoitracnghiem\service\impl\DeGocService.class
 com\xaocauhoitracnghiem\service\ITronDeService.class
 com\xaocauhoitracnghiem\controller\DownloadExamController.class
 com\xaocauhoitracnghiem\model\SampleExamModel.class
-com\xaocauhoitracnghiem\model\OriginalExamModel.class
 com\xaocauhoitracnghiem\utils\EquationToMathML.class
 com\xaocauhoitracnghiem\model\QuestionGroupModel.class
 com\xaocauhoitracnghiem\utils\CommonUtils.class
@@ -17,5 +16,6 @@ com\xaocauhoitracnghiem\model\ExamModel.class
 com\xaocauhoitracnghiem\service\impl\TronDeService.class
 com\xaocauhoitracnghiem\utils\ReadDeGoc.class
 com\xaocauhoitracnghiem\controller\UploadDeGocController.class
+com\xaocauhoitracnghiem\controller\GuideController.class
 com\xaocauhoitracnghiem\controller\DownloadSampleController.class
 com\xaocauhoitracnghiem\controller\TuyChinhXaoCauHoiController.class

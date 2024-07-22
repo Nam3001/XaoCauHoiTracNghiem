@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -32,6 +34,9 @@ import org.openxmlformats.schemas.officeDocument.x2006.math.CTR;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP;
 
 import com.xaocauhoitracnghiem.controller.TuyChinhXaoCauHoiController;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class MathMLToEquation {
 	static String projectDir = TuyChinhXaoCauHoiController.class.getProtectionDomain().getCodeSource().getLocation()
@@ -71,6 +76,67 @@ public class MathMLToEquation {
 		}
 
 		return ctOMath;
+	}
+
+	private static int[] countOperatorsAndOperands(CTOMath ctoMath) throws XmlException, IOException {
+		String xmlString = ctoMath.xmlText();
+		return countElementsInXml(xmlString);
+	}
+
+	private static int[] countElementsInXml(String xmlString) {
+		int operatorCount = 0;
+		int operandCount = 0;
+
+		try {
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document document = builder.parse(new ByteArrayInputStream(xmlString.getBytes()));
+			int[] counts = countElementsInNode(document.getDocumentElement());
+			operatorCount += counts[0];
+			operandCount += counts[1];
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return new int[]{operatorCount, operandCount};
+	}
+
+	private static int[] countElementsInNode(Node node) {
+		int operatorCount = 0;
+		int operandCount = 0;
+
+		NodeList childNodes = node.getChildNodes();
+		for (int i = 0; i < childNodes.getLength(); i++) {
+			Node child = childNodes.item(i);
+			if (child.getNodeType() == Node.ELEMENT_NODE) {
+				String nodeName = child.getNodeName();
+				if (isOperator(nodeName)) {
+					operatorCount++;
+				} else if (isOperand(child)) {
+					operandCount++;
+				}
+				int[] childCounts = countElementsInNode(child);
+				operatorCount += childCounts[0];
+				operandCount += childCounts[1];
+			}
+		}
+
+		return new int[]{operatorCount, operandCount};
+	}
+
+	private static boolean isOperator(String nodeName) {
+		// Add relevant operator tags here
+		return nodeName.equals("m:f") || nodeName.equals("m:sup") || nodeName.equals("m:sub") ||
+				nodeName.equals("m:deg") || nodeName.equals("m:op") || nodeName.equals("m:r");
+	}
+
+	private static boolean isOperand(Node node) {
+		// Check if the node contains text that represents an operand
+		if (node.getNodeName().equals("m:t")) {
+			String textContent = node.getTextContent();
+			return !textContent.trim().isEmpty();
+		}
+		return false;
 	}
 
 	public static void CopyParagraphWithEquation(XWPFParagraph srcParagraph, XWPFParagraph desParagraph) {
@@ -137,6 +203,9 @@ public class MathMLToEquation {
 						// append the oMath as MathML
 						String mathML = EquationToMathML.getMathML((CTOMath) xmlcursor.getObject());
 						CTOMath ctOMath = getOMML(mathML);
+
+//						int[] count = countOperatorsAndOperands(ctOMath);
+//						System.out.println(count[0] + count[1]);
 						CTP ctp = desParagraph.getCTP();
 						ctp.getOMathList().add(ctOMath);
 //						ctp.setOMathArray(new CTOMath[] { ctOMath });

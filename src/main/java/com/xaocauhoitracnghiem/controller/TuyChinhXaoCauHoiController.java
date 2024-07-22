@@ -29,7 +29,7 @@ public class TuyChinhXaoCauHoiController extends HttpServlet {
 		
 		String path = session.getAttribute("PathOfDeGoc") != null ? session.getAttribute("PathOfDeGoc").toString() : "";
 		DeGocService degocservice = new DeGocService();
-		OriginalExamModel exam = new OriginalExamModel();
+		ExamModel exam = new ExamModel();
 		if(!path.equals("")) {
 			exam = degocservice.getExamData(path);
 		}
