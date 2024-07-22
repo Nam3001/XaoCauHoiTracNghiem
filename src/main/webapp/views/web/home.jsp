@@ -54,7 +54,7 @@
                     độ Inline With Text (để sau này đề hoán vị, hình ảnh không bị nhảy
                     lung tung)</p>
                 <p>• Đáp án đúng phải gạch chân</p>
-                <p>• hiện tại chúng tôi chỉ hỗ trợ hình ảnh và biểu thức toán học, nếu câu hỏi có table, chart... thì bạn có thể chụp ảnh table và chart... đó và thêm vào đề!</p>
+                <p>• Hiện tại chúng tôi chỉ hỗ trợ hình ảnh và biểu thức toán học, nếu câu hỏi có table, chart... thì bạn có thể chụp ảnh table và chart... đó và thêm vào đề!</p>
             </div>
         </div>
     </div>
@@ -71,6 +71,26 @@
                 <p><b>• &lt;g3&gt;</b></p>
                 <p>Nhóm câu hỏi hoán vị cả các câu hỏi và các đáp án</p>
             </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="bg-light rounded-3 py-3">
+            <h3 class="text-center">Tải đề mẫu tham khảo</h3>
+            <form action="download-de-mau" action="get" class="d-flex justify-content-center w-100 px-4 px-lg-5 py-2">
+                <div class="col-6 col-lg-4 px-2">
+                    <select id="de-mau" name="de-mau" class="form-select" >
+                        <c:forEach items="${dsDeMau}" var="deMau">
+                            <option value="${deMau.getExamPath()}">${deMau.getName()}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="col-6 col-lg-4 px-2">
+                    <button class="btn btn-primary w-100">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Tải về</span>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     <div class="pt-4 mt-4">
