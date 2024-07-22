@@ -63,10 +63,9 @@ public class DeGocService implements IDeGocService {
 	}
 
 	@Override
-	public OriginalExamModel getExamData(String path) throws FileNotFoundException, IOException {
-		OriginalExamModel exam = new OriginalExamModel();
+	public ExamModel getExamData(String path) throws FileNotFoundException, IOException {
+		ExamModel exam = new ExamModel();
 		XWPFDocument doc = new XWPFDocument(new FileInputStream(path));
-		exam.setDocumentOfExam(doc);
 
 		// dùng để sử dụng khi paragraph không phải là group/question/answer. thì sẽ
 		// thêm paragraph này vào group/question gần nhấn

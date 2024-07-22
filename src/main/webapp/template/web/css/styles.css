@@ -19,3 +19,9 @@ div {
   display: block;
   unicode-bidi: isolate;
 }
+
+@media only screen and (max-width: 991px) {
+  img.huong-dan {
+    width: 100% !important;
+  }
+}
