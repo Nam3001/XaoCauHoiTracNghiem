@@ -47,6 +47,18 @@
                 <div class="d-flex justify-content-center"><img class="huong-dan w-75" src="<c:url value='/assets/images/doi-mathtype/convert-mathtype.png' />" /></div>
                 <p class="mt-5">Quá trình chuyển đổi sẽ tự động diễn ra, nhanh hay chậm thì sẽ phụ thuộc vào số lượng công thức và cấu hình máy tính của bạn. Đây kết quả sau khi chuyển vẫn đẹp và vẫn đúng theo các quy ước Toán học quốc tế.</p>
                 <div class="d-flex justify-content-center"><img class="huong-dan w-75" src="<c:url value='/assets/images/doi-mathtype/result-convert.png' />" /></div>
+
+                <p class="mt-5"><b># Chú ý:</b> Một vài biểu thức toán phức tạp (ví dụ: hệ phương trình có nhiều hơn 3 phương trình) thì nó sẽ không tự động convert từ MathType sang Equation được, bạn phải tự nhập, chọn hệ 2 hoặc hệ 3 phương trình rồi sau đó nhập bình thường, khi nhập xong 1 phương trình thì nhấn tổ hợp "Shift + Enter" nó sẽ xuất hiện thêm ô để nhập tiếp các hệ phương trình tiếp theo </p>
+                <p>Ví dụ:</p>
+                <div class="mt-4 d-flex flex-column align-items-center">
+                    <img class="huong-dan w-50" src="<c:url value='/assets/images/doi-mathtype/nhap-he-pt-binh-thuong.png' />" />
+                    <p class="text-secondary">Nhập hệ phương trình</p>
+                </div>
+                <div class="mt-4 d-flex flex-column align-items-center">
+                    <img class="huong-dan w-50" src="<c:url value='/assets/images/doi-mathtype/sau-khi-nhan-shift-enter.png' />" />
+                    <p class="text-secondary">Nhấn Shift + Enter để thêm ô nhập</p>
+                </div>
+
                 <h4 class="mt-5">#2. Khôi phục lại MathType về mặc định</h4>
                 <p>
                     MathType hiện tại đã bị vô hiệu hóa (vì chúng ta đã đổi file *.exe thành *.txt), nên chúng ta không thể sử dụng nó để soạn thảo công thức được. Muốn sử dụng được bạn bạn khôi phục lại trước đã.
