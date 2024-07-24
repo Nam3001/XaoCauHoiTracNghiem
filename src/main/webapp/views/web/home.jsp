@@ -34,7 +34,6 @@
                         </label> <input id="de-goc" name="de-goc" type="file"
                                         style="display: none;" accept=".docx">
                     </form>
-                    <p class="mt-2">Kéo thả hoặc nhấn chọn</p>
                 </div>
             </div>
         </div>
