@@ -85,7 +85,11 @@ public class TronDeController extends HttpServlet {
 
 		// tao de moi
 		for (ExamModel de : dsDe) {
-			tronDeService.generateExamWord(de, realPath + File.separator + "Ma_de_" + de.getMaDe() + ".docx", tienToCauHoi, isEnglishExam);
+			if(de.getMaDe().equals("000")) {
+				tronDeService.generateExamWord(de, realPath + File.separator + "de_goc" + ".docx", tienToCauHoi, isEnglishExam);
+			} else {
+				tronDeService.generateExamWord(de, realPath + File.separator + "Ma_de_" + de.getMaDe() + ".docx", tienToCauHoi, isEnglishExam);
+			}
 		}
 		// tao file chua dap an
 		tronDeService.generateRightAnswerExcel(dsDe, realPath + File.separator + "dap_an.xlsx");

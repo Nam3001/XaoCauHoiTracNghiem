@@ -14,10 +14,10 @@ public class QuestionModel {
 		this.questionOrder = questionOrder;
 	}
 	
-	public List<XWPFParagraph> getQuestionContentList() {
+	public List<Object> getQuestionContentList() {
 		return questionContentList;
 	}
-	public void setQuestionContent(List<XWPFParagraph> questionContentList) {
+	public void setQuestionContentList(List<Object> questionContentList) {
 		this.questionContentList = questionContentList;
 	}
 	public List<AnswerModel> getAnswerList() {
@@ -26,15 +26,11 @@ public class QuestionModel {
 	public void setAnswerList(List<AnswerModel> answerList) {
 		this.answerList = answerList;
 	}
-	public List<XWPFParagraph> questionContentList = new ArrayList<XWPFParagraph>();
+	public List<Object> questionContentList = new ArrayList<>();
 	public List<AnswerModel> answerList = new ArrayList<AnswerModel>();  // danh sach dap an
 
 	// 0=> chua co dap an dung, 1 => dap an dung la A, 2 => dap an dung la B, ...
 	private int rightAnswerIndex = 0;
-
-	public void setQuestionContentList(List<XWPFParagraph> questionContentList) {
-		this.questionContentList = questionContentList;
-	}
 
 	public int getRightAnswerIndex() {
 		return rightAnswerIndex;

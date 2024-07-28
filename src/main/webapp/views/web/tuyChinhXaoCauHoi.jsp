@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@page import="com.xaocauhoitracnghiem.utils.EquationToMathML" %>
 <%@include file="/common/taglib.jsp" %>
 <c:set var="count" value="1" scope="page"/>
 <!DOCTYPE html>
@@ -201,24 +200,30 @@
                 <p class="h5 text-danger">Nhóm ${ count }</p>
                 <c:set var="count" value="${ count + 1 }" scope="page"/>
                 <c:forEach items="${questionGroup.groupInfoList }" var="groupInfo">
-                    <span class="fw-bold">${EquationToMathML.getTextAndFormulas(groupInfo) }</span>
+<%--                    <span class="fw-bold">${EquationToMathML.getTextAndFormulas(groupInfo) }</span>--%>
+                    <span class="fw-bold">${ groupInfo.getText() }</span>
                 </c:forEach>
                 <c:forEach items="${ questionGroup.questionList }" var="question">
                     <p class="mb-2 pt-2">
                         <c:forEach items="${ question.questionContentList }" var="content">
-                            <span>${ EquationToMathML.getTextAndFormulas(content) }</span>
+<%--                            <span>${ EquationToMathML.getTextAndFormulas(content) }</span>--%>
+                            <span>${ content.getText() }</span>
                         </c:forEach>
                     </p>
                     <c:forEach items="${ question.answerList }" var="answer">
                         <p class="small mb-2">
                             <c:choose>
                                 <c:when test="${answer.isRightAnswer == true}">
-									<span class="text-primary">${ EquationToMathML.getTextAndFormulas(answer.content) }
+<%--									<span class="text-primary">${ EquationToMathML.getTextAndFormulas(answer.content) }--%>
+<%--										<i class="bi bi-check2"></i>--%>
+<%--									</span>--%>
+                                    <span class="text-primary">${ answer.getContent().getText() }
 										<i class="bi bi-check2"></i>
 									</span>
                                 </c:when>
                                 <c:otherwise>
-                                    <span>${ EquationToMathML.getTextAndFormulas(answer.content) }</span>
+<%--                                    <span>${ EquationToMathML.getTextAndFormulas(answer.content) }</span>--%>
+                                    <span>${ answer.getContent().getText() }</span>
                                 </c:otherwise>
                             </c:choose>
                         </p>
@@ -271,7 +276,7 @@
                     document.cookie = 'fileDownload=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
                     window.location.href = '${contextPath}' + '/thong-bao';
                 }
-            }, 1000);
+            }, 500);
 
             modal.show();
             form.submit();

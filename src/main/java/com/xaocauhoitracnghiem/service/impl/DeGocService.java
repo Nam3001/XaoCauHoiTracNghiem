@@ -16,6 +16,7 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 import com.xaocauhoitracnghiem.service.IDeGocService;
 import com.xaocauhoitracnghiem.utils.ReadDeGoc;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
 
 import javax.servlet.http.HttpSession;
 
@@ -78,92 +79,120 @@ public class DeGocService implements IDeGocService {
 		int countRow = 1;
 		int questionCount = 1;
 		int answerCount = 0;
-		for (XWPFParagraph p : doc.getParagraphs()) {
-//			if(p.getText().length() == 0) continue;
-			if (countRow == 1 && !isGroupQuestionParagraph(p)) {
-				QuestionGroupModel group = new QuestionGroupModel();
-				group.setGroupType(0);
-				exam.groupList.add(group);
-			}
+		for (int i = 0; i < doc.getBodyElements().size(); i++) {
+			Object obj = doc.getBodyElements().get(i);
+			if(obj instanceof XWPFParagraph) {
+				XWPFParagraph p = (XWPFParagraph) obj;
 
-			if (isGroupQuestionParagraph(p)) {
-				QuestionGroupModel group = new QuestionGroupModel();
 
-				if (!p.getText().trim().matches("^(<g[0-3]>)")) {
-					group.groupInfoList.add(p);
-				}
-
-				if (p.getText().trim().matches("^(<g0>)"))
+				if (countRow == 1 && !isGroupQuestionParagraph(p)) {
+					QuestionGroupModel group = new QuestionGroupModel();
 					group.setGroupType(0);
-				else if (p.getText().trim().matches("^(<g1>)"))
-					group.setGroupType(1);
-				else if (p.getText().trim().matches("^(<g2>)"))
-					group.setGroupType(2);
-				else if (p.getText().trim().matches("^(<g3>)")) {
-					group.setGroupType(3);
+					exam.getGroupList().add(group);
 				}
 
-				exam.groupList.add(group);
-				lastestElement = p;
-			} else if (isQuestionParagraph(p)) {
-				if (exam.groupList.size() > 0) {
-					QuestionModel question = new QuestionModel();
+				if (isGroupQuestionParagraph(p)) {
+					QuestionGroupModel group = new QuestionGroupModel();
 
-					question.setQuestionOrder(questionCount);
-					question.questionContentList.add(p);
+					if (!p.getText().trim().matches("^(<g[0-3]>)")) {
+						group.getGroupInfoList().add(p);
+					}
 
-					QuestionGroupModel lastGroup = exam.groupList.get(exam.groupList.size() - 1);
-					lastGroup.questionList.add(question);
+					if (p.getText().trim().matches("^(<g0>)"))
+						group.setGroupType(0);
+					else if (p.getText().trim().matches("^(<g1>)"))
+						group.setGroupType(1);
+					else if (p.getText().trim().matches("^(<g2>)"))
+						group.setGroupType(2);
+					else if (p.getText().trim().matches("^(<g3>)")) {
+						group.setGroupType(3);
+					}
 
+					exam.getGroupList().add(group);
 					lastestElement = p;
-					answerCount = 0;
-				}
-			} else if (isAnswerParagraph(p)) {
-				if (exam.groupList.size() > 0) {
-					answerCount++;
-					QuestionGroupModel lastGroup = exam.groupList.get(exam.groupList.size() - 1);
-					QuestionModel lastQuestionOfLastGroup;
-					if (lastGroup.questionList.size() > 0) {
-						lastQuestionOfLastGroup = lastGroup.questionList.get(lastGroup.questionList.size() - 1);
-						AnswerModel answer = new AnswerModel();
-						answer.content = p;
+				} else if (isQuestionParagraph(p)) {
+					if (exam.getGroupList().size() > 0) {
+						QuestionModel question = new QuestionModel();
 
-						boolean rightAnswer = isRightAnswerParagraph(p);
-						if (rightAnswer) {
-							answer.isRightAnswer = true;
-							lastQuestionOfLastGroup.setRightAnswerIndex(answerCount);
-						}
+						question.setQuestionOrder(questionCount);
+						question.getQuestionContentList().add(p);
 
-						lastQuestionOfLastGroup.answerList.add(answer);
+						QuestionGroupModel lastGroup = exam.getGroupList().get(exam.getGroupList().size() - 1);
+						lastGroup.getQuestionList().add(question);
 
-						int questionMultiRightAnsSize = exam.getQuestionHaveMultiRightAnswerlist().size();
-						if ((rightAnswer && questionMultiRightAnsSize > 0 && exam.getQuestionHaveMultiRightAnswerlist().get(questionMultiRightAnsSize - 1) != lastQuestionOfLastGroup) || (rightAnswer && questionMultiRightAnsSize == 0)) {
-							if(lastQuestionOfLastGroup.checkMultiRightAnswer()) {
-								exam.getQuestionHaveMultiRightAnswerlist().add(lastQuestionOfLastGroup);
+						lastestElement = p;
+						answerCount = 0;
+					}
+				} else if (isAnswerParagraph(p)) {
+					if (exam.getGroupList().size() > 0) {
+						answerCount++;
+						QuestionGroupModel lastGroup = exam.getGroupList().get(exam.getGroupList().size() - 1);
+						QuestionModel lastQuestionOfLastGroup;
+						if (lastGroup.getQuestionList().size() > 0) {
+							lastQuestionOfLastGroup = lastGroup.getQuestionList().get(lastGroup.getQuestionList().size() - 1);
+							AnswerModel answer = new AnswerModel();
+							answer.setContent(p);
+
+							boolean rightAnswer = isRightAnswerParagraph(p);
+							if (rightAnswer) {
+								answer.setRightAnswer(true);
+								lastQuestionOfLastGroup.setRightAnswerIndex(answerCount);
+							}
+
+							lastQuestionOfLastGroup.getAnswerList().add(answer);
+
+							int questionMultiRightAnsSize = exam.getQuestionHaveMultiRightAnswerlist().size();
+							if ((rightAnswer && questionMultiRightAnsSize > 0 && exam.getQuestionHaveMultiRightAnswerlist().get(questionMultiRightAnsSize - 1) != lastQuestionOfLastGroup) || (rightAnswer && questionMultiRightAnsSize == 0)) {
+								if(lastQuestionOfLastGroup.checkMultiRightAnswer()) {
+									exam.getQuestionHaveMultiRightAnswerlist().add(lastQuestionOfLastGroup);
+								}
 							}
 						}
 					}
-				}
 
-			} else {
-				if (countRow == 1 || lastestElement == null) {
-					exam.groupList.get(0).groupInfoList.add(p);
 				} else {
-					if (exam.groupList.size() > 0) {
-						QuestionGroupModel lastGroup = exam.groupList.get(exam.groupList.size() - 1);
+					if (countRow == 1 || lastestElement == null) {
+						exam.getGroupList().get(0).getGroupInfoList().add(p);
+					} else {
+						if (exam.getGroupList().size() > 0) {
+							QuestionGroupModel lastGroup = exam.getGroupList().get(exam.getGroupList().size() - 1);
+							if (isGroupQuestionParagraph(lastestElement)) {
+								lastGroup.getGroupInfoList().add(p);
+							} else if (isQuestionParagraph(lastestElement)) {
+								QuestionModel lastQuestionOfLastGroup = lastGroup.getQuestionList()
+										.get(lastGroup.getQuestionList().size() - 1);
+								lastQuestionOfLastGroup.getQuestionContentList().add(p);
+							}
+						}
+					}
+
+				}
+				// tang so dong len;
+				countRow++;
+
+			} else if (obj instanceof XWPFTable) {
+				XWPFTable tbl = (XWPFTable) obj;
+
+				if(countRow == 1) {
+					QuestionGroupModel group = new QuestionGroupModel();
+					group.getGroupInfoList().add(tbl);
+					group.setGroupType(0);
+					exam.getGroupList().add(group);
+				} else {
+					if (exam.getGroupList().size() > 0) {
+						QuestionGroupModel lastGroup = exam.getGroupList().get(exam.getGroupList().size() - 1);
 						if (isGroupQuestionParagraph(lastestElement)) {
-							lastGroup.groupInfoList.add(p);
+							lastGroup.getGroupInfoList().add(tbl);
 						} else if (isQuestionParagraph(lastestElement)) {
-							QuestionModel lastQuestionOfLastGroup = lastGroup.questionList
-									.get(lastGroup.questionList.size() - 1);
-							lastQuestionOfLastGroup.questionContentList.add(p);
+							QuestionModel lastQuestionOfLastGroup = lastGroup.getQuestionList()
+									.get(lastGroup.getQuestionList().size() - 1);
+							lastQuestionOfLastGroup.getQuestionContentList().add(tbl);
 						}
 					}
 				}
 
+				countRow++;
 			}
-			// tang so dong len;
-			countRow++;
 		}
 
 		for(QuestionModel question : exam.getQuestionHaveMultiRightAnswerlist()) {
@@ -177,14 +206,14 @@ public class DeGocService implements IDeGocService {
 	public int getQuestionCount(ExamModel exam) {
 		// TODO Auto-generated method stub
 		int res = 0;
-		for (QuestionGroupModel group : exam.groupList) {
-			res += group.questionList.size();
+		for (QuestionGroupModel group : exam.getGroupList()) {
+			res += group.getQuestionList().size();
 		}
 		return res;
 	}
 
 	@Override
 	public int getQuestionGroupCount(ExamModel exam) {
-		return exam.groupList.size();
+		return exam.getGroupList().size();
 	}
 }
