@@ -54,7 +54,6 @@
                     lung tung)</p>
                 <p>• Đáp án <b>đúng</b> phải <b>gạch chân</b></p>
                 <p>• Khi soạn <b>đáp án trong đề gốc</b> thì bạn hãy tắt tính năng <b>tự động đánh số đầu dòng</b> trong Word. Vì khi nhập <b>"A., B., C., ..."</b> trong Word thì Word sẽ tự động tạo <b>Numbered Lists</b>. Lúc này thì sẽ không đọc được <b>"A., B., C., ..."</b> nên không nhận diện được <b>đáp án</b>. Do đó bạn phải tắt <b>Automatic Numbered Lists</b> thì chúng tôi mới nhận diện được đáp án.</b> <a href="huong-dan-tat-auto-list">Hướng dẫn tắt tính năng tự động đánh số đầu dòng trong Word</a></p>
-                <p>• Hiện tại chúng tôi <b>chỉ hỗ trợ thêm hình ảnh, và biểu thức toán Equation</b>, nếu câu hỏi có <b>table, chart, shape...</b> thì bạn có thể <b>chụp ảnh table, chart, shape... đó</b> và thêm vào đề gốc để xáo! <a href="huong-dan-them-anh">Hướng dẫn thêm chụp ảnh màn hình</a></p>
                 <p>• Chúng tôi <b>không</b> hỗ trợ <b>MathType</b>, chỉ hỗ trợ <b>Equation</b> trong Word để nhập biểu thức toán nên bạn phải dùng <b>Equation trong Word</b> để nhập biểu thức toán để soạn đề gốc, nếu đã lỡ dùng <b>MathType</b> thì bạn <b>phải convert MathType sang Equation trong Word.</b> <a href="huong-dan-convert-mathtype">Hướng dẫn Convert MathType sang Equation trong Word</a></p>
             </div>
         </div>

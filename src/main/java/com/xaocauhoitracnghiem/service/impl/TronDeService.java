@@ -15,7 +15,6 @@ import org.apache.poi.util.Units;
 import org.apache.poi.wp.usermodel.HeaderFooterType;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.*;
-import org.apache.xmlbeans.XmlCursor;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
 
 import com.xaocauhoitracnghiem.model.AnswerModel;
@@ -26,7 +25,6 @@ import com.xaocauhoitracnghiem.service.ITronDeService;
 import com.xaocauhoitracnghiem.utils.CommonUtils;
 
 import javax.imageio.ImageIO;
-
 public class TronDeService implements ITronDeService {
     private void setPageMarin(XWPFDocument document) {
         // set page margin
@@ -551,10 +549,12 @@ public class TronDeService implements ITronDeService {
                     int pictureCount = 0;
                     for (int i = 0; i < p.getRuns().size(); i++) {
                         if (p.getRuns().get(i).getText(0) == null && p.getRuns().get(i).getEmbeddedPictures().size() > 0) {
+                            // trường hợp 1 paragraph có nhiều picture
                             if (pictureCount <= 0) {
                                 countParagraphHavePicture++;
                             }
 
+                            // tăng pictureCount trước, khi lấy ảnh thì trừ lui 1
                             List<XWPFPicture> picLst = picListOfParagraphs.get(countParagraphHavePicture - 1);
 
                             if (picLst.size() <= 0) continue;

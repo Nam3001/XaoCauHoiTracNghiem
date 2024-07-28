@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 
-@WebServlet(urlPatterns = {"/huong-dan-them-anh", "/huong-dan-convert-mathtype", "/huong-dan-tat-auto-list"})
+@WebServlet(urlPatterns = {"/huong-dan-convert-mathtype", "/huong-dan-tat-auto-list"})
 public class GuideController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,9 +19,7 @@ public class GuideController extends HttpServlet {
         String contextPath = req.getContextPath();
 
         RequestDispatcher rd;
-        if(requestUri.equals(contextPath + "/huong-dan-them-anh")) {
-            rd = req.getRequestDispatcher("/views/web/guidelines/themAnh.jsp");
-        } else if(requestUri.equals(contextPath + "/huong-dan-convert-mathtype")) {
+        if(requestUri.equals(contextPath + "/huong-dan-convert-mathtype")) {
             rd = req.getRequestDispatcher("/views/web/guidelines/convertMathtype.jsp");
         } else {
             rd = req.getRequestDispatcher("/views/web/guidelines/disableAutoList.jsp");
