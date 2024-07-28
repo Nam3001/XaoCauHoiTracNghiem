@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
 
 public class ExamModel {
 	public List<QuestionGroupModel> groupList = new ArrayList<QuestionGroupModel>();
@@ -124,16 +125,20 @@ public class ExamModel {
 					newQuestion.getAnswerList().add(newAnswer);
 				}
 				
-				for(XWPFParagraph questionContent : question.getQuestionContentList()) {
-					newQuestion.getQuestionContentList().add(questionContent);
+				for(Object questionContent : question.getQuestionContentList()) {
+					if(questionContent instanceof XWPFParagraph || questionContent instanceof XWPFTable) {
+						newQuestion.getQuestionContentList().add(questionContent);
+					}
 				}
 				
 				// add newQuestion to newGroup questionList
 				newGroup.getQuestionList().add(newQuestion);
 			}
 			
-			for(XWPFParagraph groupInfo : group.getGroupInfoList()) {
-				newGroup.getGroupInfoList().add(groupInfo);
+			for(Object groupInfo : group.getGroupInfoList()) {
+				if(groupInfo instanceof XWPFParagraph || groupInfo instanceof XWPFTable) {
+					newGroup.getGroupInfoList().add(groupInfo);
+				}
 			}
 			
 			// add newGroup to groupList

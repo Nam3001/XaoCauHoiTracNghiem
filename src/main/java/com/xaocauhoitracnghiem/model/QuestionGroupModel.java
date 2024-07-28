@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
 
 public class QuestionGroupModel {
 	public List<QuestionModel> questionList = new ArrayList<QuestionModel>();
-	public List<XWPFParagraph> groupInfoList = new ArrayList<XWPFParagraph>();
+	public List<Object> groupInfoList = new ArrayList<>();
 	
 	// type = 0 => không cần xáo
 	// typ = 1 => chỉ cần xáo câu hỏi
@@ -27,10 +28,10 @@ public class QuestionGroupModel {
 	public void setQuestionList(List<QuestionModel> questionList) {
 		this.questionList = questionList;
 	}
-	public List<XWPFParagraph> getGroupInfoList() {
+	public List<Object> getGroupInfoList() {
 		return groupInfoList;
 	}
-	public void setGroupInfo(List<XWPFParagraph> groupInfo) {
+	public void setGroupInfo(List<Object> groupInfo) {
 		this.groupInfoList = groupInfo;
 	}
 }

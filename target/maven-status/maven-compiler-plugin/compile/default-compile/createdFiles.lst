@@ -1,11 +1,9 @@
-com\xaocauhoitracnghiem\utils\MathMLToEquation.class
 com\xaocauhoitracnghiem\controller\TronDeController.class
 com\xaocauhoitracnghiem\controller\ThongBaoController.class
 com\xaocauhoitracnghiem\service\impl\DeGocService.class
 com\xaocauhoitracnghiem\service\ITronDeService.class
 com\xaocauhoitracnghiem\controller\DownloadExamController.class
 com\xaocauhoitracnghiem\model\SampleExamModel.class
-com\xaocauhoitracnghiem\utils\EquationToMathML.class
 com\xaocauhoitracnghiem\model\QuestionGroupModel.class
 com\xaocauhoitracnghiem\utils\CommonUtils.class
 com\xaocauhoitracnghiem\model\QuestionModel.class
