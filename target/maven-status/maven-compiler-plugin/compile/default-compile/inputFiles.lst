@@ -3,7 +3,7 @@ D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\j
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\controller\DownloadExamController.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\controller\DownloadSampleController.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\utils\CommonUtils.java
-D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\utils\ReadDeGoc.java
+D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\utils\GenerateExamDocxUtils.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\service\ITronDeService.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\model\QuestionModel.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\model\ExamModel.java
@@ -11,6 +11,7 @@ D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\j
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\service\IDeGocService.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\controller\TuyChinhXaoCauHoiController.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\controller\GuideController.java
+D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\utils\LoadPictureToExamDocxElementUtils.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\controller\ThongBaoController.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\controller\TronDeController.java
 D:\workspace\java_eclipse2018\ThucTapVietNienLuan\XaoCauHoiTracNghiem\src\main\java\com\xaocauhoitracnghiem\controller\UploadDeGocController.java

@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
 encoding//src/main/java/com/xaocauhoitracnghiem/controller/DownloadExamController.java=UTF-8
 encoding//src/main/java/com/xaocauhoitracnghiem/model/ExamModel.java=UTF-8
 encoding//src/main/java/com/xaocauhoitracnghiem/model/QuestionGroupModel.java=UTF-8
@@ -6,3 +7,4 @@ encoding//src/main/java/com/xaocauhoitracnghiem/service/IDeGocService.java=UTF-8
 encoding//src/main/java/com/xaocauhoitracnghiem/service/impl/DeGocService.java=UTF-8
 encoding//src/main/java/com/xaocauhoitracnghiem/service/impl/TronDeService.java=UTF-8
 encoding//src/main/java/com/xaocauhoitracnghiem/utils/ReadDeGoc.java=UTF-8
+encoding/<project>=UTF-8

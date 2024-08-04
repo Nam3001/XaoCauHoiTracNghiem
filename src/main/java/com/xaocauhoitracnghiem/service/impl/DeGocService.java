@@ -3,11 +3,6 @@ package com.xaocauhoitracnghiem.service.impl;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import com.xaocauhoitracnghiem.model.*;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -15,10 +10,7 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 import com.xaocauhoitracnghiem.service.IDeGocService;
-import com.xaocauhoitracnghiem.utils.ReadDeGoc;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
-
-import javax.servlet.http.HttpSession;
 
 public class DeGocService implements IDeGocService {
 	@Override
